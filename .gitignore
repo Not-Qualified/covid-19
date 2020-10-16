@@ -1,8 +1,10 @@
+*.log
+*.pot
+*.pyc
+
 __pycache__/*
 
 venv/*
-
-*.pyc
 
 media/*
 
