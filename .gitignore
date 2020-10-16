@@ -6,6 +6,4 @@ venv/*
 
 media/*
 
-db1.sqlite3
-
-migrations/*
+db.sqlite3
