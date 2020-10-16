@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+	<form method="POST" action=".">
+	{% csrf_token %}
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="col col-sm-6">
+					<div class="md-form mb-5">
+						{{ form.name }}
+						<label>{{ form.name.label }}</label>
+						<span class="text-danger">{{ form.name.errors }}</span>
+					</div>
+				</div>
+
+				<div class="col col-sm-6">
+					<div class="md-form mb-5">
+						{{ form.age }}
+						<label>{{ form.age.label }}</label>
+						<span class="text-danger">{{ form.age.errors }}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col col-sm-6">
+				<!-- <div class="md-form mb-5"> -->
+				<label>{{ form.state.label }}</label>
+				{{ form.state }}
+				<span class="text-danger">{{ form.state.errors }}</span>
+				<!-- </div> -->
+				</div>
+
+				<div class="col col-sm-6">
+				<!-- <div class="md-form mb-5"> -->
+				<label>{{ form.district.label }}</label>
+				{{ form.district }}
+				<span class="text-danger">{{ form.district.errors }}</span>
+				<!-- </div> -->
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col col-sm-6">
+					<div class="md-form mb-5">
+						{{ form.email }}
+						<label>{{ form.email.label }}</label>
+						<span class="text-danger">{{ form.email.errors }}</span>
+					</div>
+				</div>
+				<div class="col col-sm-6">
+					<div class="md-form mb-5">
+						{{ form.mobile_number }}
+						<label>{{ form.mobile_number.label }}</label>
+						<span class="text-danger">{{ form.mobile_number.errors }}</span>
+					</div>
+				</div>
+			</div>
+
+			<button class="btn blue-gradient btn-rounded z-depth-1a">Submit</button>
+
+			</form>
+
+		</div>
+		
+
+		<div class="col-sm-6">
+		{% for post in object_list %}
+			<a href="{{ post.link }}">
+				<h3 class="mt-5 text-primary"><p><u>{{ post.title }}</p></u></h3>
+			</a>
+			<h4>
+				<span class="badge badge-primary">{{ post.date_added }}</span>
+				<a href="{{ post.link }}" class="btn /*btn-sm*/ btn-secondary btn-rounded z-depth-1a">Link</a>
+			</h4>
+			<div class="container">
+				<p class="mt-3">{{ post.description }}</p>
+			</div>
+			<hr></hr>
+		{% endfor %}
+		</div>
+	</div>
+{% endblock content %}
+
+{% block script %}
+	<script src="{% static 'states-districts.js' %}"></script>
+{% endblock script %}

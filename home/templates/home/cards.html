@@ -1,0 +1,79 @@
+{% load indian_numbers_tags %}
+<style type="text/css">
+.card{
+    border-radius: 75px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+      transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  padding: 18px 36px;  /*14px 80px  first two value */
+  cursor: pointer;
+}
+
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+/*.card-1:hover
+{
+	background-color: #ee858f;
+}
+
+.card-2:hover
+{
+	background-color: #92bcea;
+}
+
+.card-3:hover
+{
+	background-color: #8fe6a3;
+}
+
+.card-4:hover
+{
+	background-color: #aebcc8;
+}*/
+</style>
+
+<div class="row">
+	<div class="col-sm">	
+		<div class="card card-1 border-danger mb-3" style="max-width: 18rem;">
+			<div class="card-header" style="border-radius: 75px;">Confirmed</div>
+				<div class="card-body">
+				<h2 class="card-title text-danger text-center"><span class="Count">{{ state_list.Total_Testing.total.confirmed|default:0 }}</span></h2>
+				<h5 class="card-title text-danger text-center">+<span class="Count">{{ state_list.Total_Testing.delta.confirmed|default:0 }}</span></h5>
+				<p class="card-text"></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm">
+		<div class="card card-2 border-primary mb-3" style="max-width: 18rem;">
+			<div class="card-header" style="border-radius: 75px;">Active</div>
+				<div class="card-body">
+				<h2 class="card-title text-primary text-center"><span class="Count">{{ state_list.Total_Testing.total.confirmed|default:0 }}</span></h2>
+				<h5 class="card-title text-primary text-center">+<span class="Count">{{ state_list.Total_Testing.delta.active|default:0 }}</span></h5>
+				<p class="card-text"></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm">
+		<div class="card card-3 border-success mb-3" style="max-width: 18rem;">
+			<div class="card-header" style="border-radius: 75px;">Recovered</div>
+				<div class="card-body">
+				<h2 class="card-title text-success text-center"><span class="Count">{{ state_list.Total_Testing.total.recovered|default:0 }}</span></h2>
+				<h5 class="card-title text-success text-center">+<span class="Count">{{ state_list.Total_Testing.delta.recovered|default:0 }}</span></h5>
+				<p class="card-text"></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm">
+		<div class="card card-4 border-secondary mb-3" style="max-width: 18rem;">
+			<div class="card-header" style="border-radius: 75px;">Deceased</div>
+				<div class="card-body">
+				<h2 class="card-title text-secondary text-center"><span class="Count">{{ state_list.Total_Testing.total.deceased|default:0 }}</span></h2>
+				<h5 class="card-title text-secondary text-center">+<span class="Count">{{ state_list.Total_Testing.delta.deceased|default:0 }}</span></h5>
+				<p class="card-text"></p>
+			</div>
+		</div>
+	</div>
+</div>

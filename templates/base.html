@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% include "css.html" %}
+        {% block head %}{% endblock head %}
+        
+        <title>Covid-19 India</title>
+    </head>
+    <body style="padding-top: 4.5rem;">
+        
+        {% include "navbar.html" %}
+
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mt-5 mb-5">
+                        <b>{{ message }}</b>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% block content %}{% endblock content %}
+        </div>
+
+        {% include "script.html" %}
+
+        {% block script %}{% endblock script %}
+        
+    </body>
+</html>
