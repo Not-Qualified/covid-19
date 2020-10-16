@@ -8,6 +8,4 @@ venv/*
 
 media/*
 
-*.sqlite3
-
-user/*
+db.sqlite3
