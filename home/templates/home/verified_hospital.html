@@ -3,12 +3,13 @@
 
 {% block content %}
 
-<div class="table-responsive">
+
 	<table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
 	        <thead class="thead-dark">
 	            <tr>
 	            	<th>State</th>
 	            	<th>District</th>
+	            	<th>City</th>
 	                <th>Hospital Name</th>
 	                <th>Insurance Facility</th>
 	                <th>Ventilator Facility</th>
@@ -25,6 +26,7 @@
         		<tr>
         			<td>{{ hospital.state }}</td>
         			<td>{{ hospital.district }}</td>
+        			<td>{{ hospital.city }}</td>
         			<td>{{ hospital.hospital_name }}</td>
         			<td>{{ hospital.insurance_facility }}</td>
         			<td>{{ hospital.ventilator_facility }}</td>
@@ -32,7 +34,7 @@
         			<td>{{ hospital.hospital_contact_number }}</td>
         			<td>{{ hospital.hospital_email }}</td>
         			<td>
-        				<a href="{{ hospital.hospital_website }}">
+        				<a href="{{ hospital.hospital_website }}" target="_blank">
         					{{ hospital.hospital_website }}
         				</a>
         			</td>
@@ -43,7 +45,7 @@
         	{% endfor %}
 	        </tbody>
 	</table>
-</div>
+
 
 {% endblock content %}
 

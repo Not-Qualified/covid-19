@@ -75,55 +75,36 @@ table tbody tr td a {
 		var ctxD = document.getElementById("doughnutChart").getContext('2d');
 		var confirmed = [], deceased = [], recovered = [], others = [], tested = [];
 		var clabel = [];
-		// {% for i, j in confirmed.items %}
-		// 	confirmed.push({{ j }});
-		// 	clabel.push({{ i }});
-		// {% endfor %}
-		// console.log({{ dates }}.replace("'", ""));
-		{% for i in dates %}
-			clabel.push({{ i }});
-		{% endfor %}
-		{% for i, j in deceased.items %}
-			deceased.push({{ j }});
-		{% endfor %}
-		{% for i, j in recovered.items %}
-			recovered.push({{ j }}/10000);
-		{% endfor %}
-		{% for i, j in other.items %}
-			others.push({{ j }}/10000);
-		{% endfor %}
-		{% for i, j in tested.items %}
-			tested.push({{ j }}/10000);
-		{% endfor %}
+
 		var myLineChart = new Chart(ctxD, {
 			type: 'line',
 			data: {
-			labels: clabel,
+			labels: {{ confirmed }},
 			datasets: [{
 				label: "confirmed",
 				borderColor: "red",
 				data: {{ confirmed }},
 			},
-			// {
-			// 	label: "deceased",
-			// 	borderColor: "grey",
-			// 	data: deceased,
-			// },
-			// {
-			// 	label: "recovered",
-			// 	borderColor: "green",
-			// 	data: recovered,
-			// },
+			{
+				label: "deceased",
+				borderColor: "grey",
+				data: {{ deceased }},
+			},
+			{
+				label: "recovered",
+				borderColor: "green",
+				data: {{recovered}},
+			},
 			// {
 			// 	label: "others",
 			// 	borderColor: "yellow",
-			// 	data: others,
+			// 	data: {{others}},
 			// },
-			// {
-			// 	label: "tested",
-			// 	borderColor: "orange",
-			// 	data: tested,
-			// },
+			{
+				label: "tested",
+				borderColor: "orange",
+				data: {{tested}},
+			}
 		]
 	},
 			options: {

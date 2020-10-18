@@ -34,16 +34,15 @@ def home_view(request, *args, **kwargs):
 						DATES.append(date)
 						if "delta" in data:
 							if "confirmed" in data["delta"]:
-								# confirmed[date] = data["delta"]["confirmed"]
 								confirmed.append(data["delta"]["confirmed"])
-							# if "deceased" in data["delta"]:
-							# 	deceased[date] = data["delta"]["deceased"]
-							# if "other" in data["delta"]:
-							# 	other[date] = data["delta"]["other"]
-							# if "recovered" in data["delta"]:
-							# 	recovered[date] = data["delta"]["recovered"]
-							# if "tested" in data["delta"]:
-							# 	tested[date] = data["delta"]["tested"]
+							if "deceased" in data["delta"]:
+								deceased.append(data["delta"]["deceased"])
+							if "other" in data["delta"]:
+								other.append(data["delta"]["other"])
+							if "recovered" in data["delta"]:
+								recovered.append(data["delta"]["recovered"])
+							if "tested" in data["delta"]:
+								tested.append(data["delta"]["tested"])
 		# print(DATES)
 		# print(len(DATES))
 		context = {
@@ -94,7 +93,7 @@ def hospital_register_view(request, *args, **kwargs):
 	form = HospitalRegisterForm(request.POST or None)
 	if form.is_valid():
 		form.save()
-		messages.success(request, "Your Detail Has been Updated, You may get a Call for Cofirmation, After Confirmation Your Information will be on Site at COVID Hospital List")
+		messages.success(request, "Your detail will be submitted after verification. You may get a call for that, Thank you !")
 		form = HospitalRegisterForm()
 	context = {
 		"form": form,

@@ -62,8 +62,12 @@ class VaccineUpdateForm(forms.ModelForm):
 	district = forms.CharField(max_length=100, 
 							widget=forms.Select(choices=DISTRICT_CHOICES,
 								attrs={"class": "custom-select district"}))
+	city = forms.CharField(max_length=100, required=False,
+							widget=forms.TextInput(
+								attrs={"class": "form-control", }, ), )
+	
 
-	email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control"}))
+	email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "form-control"}), required=False,)
 	mobile_number = forms.CharField(
 							widget=forms.NumberInput(attrs={"class": "form-control", 
 															"max": 9999999999, 
@@ -89,7 +93,7 @@ class HospitalRegisterForm(forms.ModelForm):
 							widget=forms.NumberInput(
 								attrs={"class": "form-control", 
 								"onKeyPress": "if(this.value.length==10) return false;"}, ), )
-	email = forms.CharField(max_length=100, 
+	email = forms.CharField(max_length=100, required=False,
 							widget=forms.EmailInput(
 								attrs={"class": "form-control", }, ), )
 
@@ -99,9 +103,9 @@ class HospitalRegisterForm(forms.ModelForm):
 	district = forms.CharField(max_length=100, 
 							widget=forms.Select(choices=DISTRICT_CHOICES,
 								attrs={"class": "custom-select district", }, ), )
-	# city = forms.CharField(max_length=100, 
-	# 						widget=forms.TextInput(
-	# 							attrs={"class": "form-control", }, ), )
+	city = forms.CharField(max_length=100, required=False,
+							widget=forms.TextInput(
+								attrs={"class": "custom-select", }, ), )
 
 	hospital_name = forms.CharField(max_length=250, 
 							widget=forms.TextInput(
@@ -115,7 +119,7 @@ class HospitalRegisterForm(forms.ModelForm):
 							widget=forms.NumberInput(
 								attrs={"class": "form-control", 
 								"onKeyPress": "if(this.value.length==10) return false;"}, ), )
-	hospital_email = forms.CharField(
+	hospital_email = forms.CharField(required=False,
 							widget=forms.EmailInput(
 								attrs={"class": "form-control", }, ), )
 
@@ -129,7 +133,7 @@ class HospitalRegisterForm(forms.ModelForm):
 	address = forms.CharField(max_length=500, 
 							widget=forms.TextInput(
 								attrs={"class": "form-control", }, ), )
-	hospital_website = forms.CharField(max_length=500, 
+	hospital_website = forms.CharField(max_length=500, required=False,
 							widget=forms.URLInput(
 								attrs={"class": "form-control", }, ), )
 

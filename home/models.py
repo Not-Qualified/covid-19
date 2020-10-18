@@ -10,6 +10,7 @@ FACILITY_CHOICES = [("YES", "Yes"), ("NO", "No"), ]
 class VaccineUpdatePost(models.Model):
 	title = models.CharField(max_length=500, )
 	link = models.URLField(max_length=700, )
+	source = models.CharField(max_length=250, )
 	description = models.TextField(null=True, blank=True, )
 	date_added = models.DateTimeField(auto_now_add=True)
 
@@ -29,8 +30,9 @@ class VaccineUpdate(models.Model):
 
 	state = models.CharField(max_length=100, )
 	district = models.CharField(max_length=100, )
+	city = models.CharField(max_length=100, null=True, blank=True, )
 
-	email = models.EmailField()
+	email = models.EmailField(null=True, blank=True, )
 	mobile_number = models.CharField(max_length=10, validators=[mobile_regex, ])
 
 	def __str__(self):
@@ -42,18 +44,18 @@ class HospitalRegister(models.Model):
 
 	name = models.CharField(max_length=150, )
 	mobile_number = models.CharField(max_length=10, validators=[mobile_regex, ])
-	email = models.EmailField()
+	email = models.EmailField(null=True, blank=True, )
 
 	state = models.CharField(max_length=100, )
 	district = models.CharField(max_length=100, )
-	# city = models.CharField(max_length=100, )
+	city = models.CharField(max_length=100, null=True, blank=True, )
 
 	hospital_name = models.CharField(max_length=250, )
 	number_of_beds = models.IntegerField(validators=[
 											MinValueValidator(limit_value=1,
 											message="Must be Greater than Zero"), ])
 	hospital_contact_number = models.CharField(max_length=10, validators=[mobile_regex, ])
-	hospital_email = models.EmailField()
+	hospital_email = models.EmailField(null=True, blank=True, )
 
 
 	insurance_facility = models.CharField(max_length=3, 
@@ -64,7 +66,7 @@ class HospitalRegister(models.Model):
 											default="YES", )
 
 	address = models.CharField(max_length=500, )
-	hospital_website = models.URLField(max_length=500, )
+	hospital_website = models.URLField(max_length=500, null=True, blank=True, )
 
 	def __str__(self):
 		return f"""{self.hospital_name} - {self.number_of_beds} - 
