@@ -55,7 +55,7 @@ def home_view(request, *args, **kwargs):
 							else:
 								tested.append(0)
 						if date == datetime.datetime.now().strftime("%Y-%m-%d"):
-							print(date)	
+							pass
 			else:
 				for i, dt in dates.items():
 					for date, data in dt.items():
@@ -82,10 +82,22 @@ def district_view(request, state=None, *args, **kwargs):
 
 	chain = chain.json()
 
+	districts, total, confirmed, recovered, deceased, tested = [], [], [], [], [], []
+	both = {}
+	for state_code, data in chain.items():
+		if(state_code == state):
+			for district_name, data in data["districts"].items():
+				districts.append(district_name)
+				total.append(data["total"])
+				both[district_name] = data["total"]
+
 	state_detail = chain[state]
 
 	context = {
 		"state_detail": state_detail,
+		"districts": districts,
+		"total": total,
+		"both": both,
 	}
 
 	return render(request, "home/district.html", context)

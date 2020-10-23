@@ -11,38 +11,43 @@ table tbody tr td a {
 
 {% include "home/cards.html" %}
 
-<div class="table-responsive">
-	<table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
-	        <thead class="thead-dark">
-	            <tr>
-	                <th>State Name</th>
-	                <th>Confirmed</th>
-	                <th>Active</th>
-	                <th>Recovered</th>
-	                <th>Deceased</th>
-	                <th>Tested</th>
-	                <th>Population</th>
-	            </tr>
-	        </thead>
-	        <tbody>
-	        	{% for state, data in state_list.items %}
-	        	{% if not "Total_Testing" == state %}
-		        	<tr>
-		        		<td><a href="/{{ data.code }}/">{{ state }}</a></td>
-		        		<td>{{ data.total.confirmed|intcomma_indian|default:0 }}</td>
-		        		<td>{{ data.total.confirmed|sub:data.total.recovered }}</td>
-		        		<td>{{ data.total.recovered|intcomma_indian|default:0 }}</td>
-		        		<td>{{ data.total.deceased|intcomma_indian|default:0 }}</td>
-		        		<td>{{ data.total.tested|intcomma_indian|default:0 }}</td>
-		        		<td>{{ data.meta.population|floatword_indian|default:0 }}</td>
-		        	</tr>
-	        	{% endif %}
-	        	{% endfor %}
-	        </tbody>
-	</table>
+<div class="row">
+	<div class="col-sm-12 col-md-8">
+		<div class="table-responsive">
+			<table id="example" class="display table table-sm table-striped table-borderless table-hover" style="width:100%">
+			        <thead class="thead-dark">
+			            <tr>
+			                <th>State Name</th>
+			                <th>Confirmed</th>
+			                <th>Active</th>
+			                <th>Recovered</th>
+			                <th>Deceased</th>
+			                <th>Tested</th>
+			                <th>Population</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	{% for state, data in state_list.items %}
+			        	{% if not "Total_Testing" == state %}
+				        	<tr>
+				        		<td><a href="/{{ data.code }}/">{{ state }}</a></td>
+				        		<td>{{ data.total.confirmed|intcomma_indian|default:0 }}</td>
+				        		<td>{{ data.total.confirmed|sub:data.total.recovered }}</td>
+				        		<td>{{ data.total.recovered|intcomma_indian|default:0 }}</td>
+				        		<td>{{ data.total.deceased|intcomma_indian|default:0 }}</td>
+				        		<td>{{ data.total.tested|floatword_indian|default:0 }}</td>
+				        		<td>{{ data.meta.population|floatword_indian|default:0 }}</td>
+				        	</tr>
+			        	{% endif %}
+			        	{% endfor %}
+			        </tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-4">
+		{% include 'home/index-chart.html' %}
+	</div>
 </div>
-
-{% include 'home/index-chart.html' %}
 
 {% endblock content %}
 
@@ -52,6 +57,7 @@ table tbody tr td a {
 		    $('#example').DataTable({
 		    	"paging":   false,
 		    	"info":     false,
+		    	"order": [[ 1, "desc" ]],
 		    });
 		} );
 	</script>

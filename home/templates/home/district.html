@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load mathfilters %}
+{% load keyvalue %}
 
 {% block content %}
 
@@ -16,15 +17,15 @@
 	            </tr>
 	        </thead>
 	        <tbody>
-	        	{% for district, data in state_detail.districts.items %}
-		        	<tr id="row-{{ forloop.counter }}">
-		        		<td name="cell-district">{{ district }}</td>
-		        		<td name="cell-confirmed">{{ data.total.confirmed|default:0 }}</td>
-		        		<td name="cell-active">{{ data.total.confirmed|sub:data.total.recovered }}</td>
-		        		<td name="cell-recovered">{{ data.total.recovered|default:0 }}</td>
-		        		<td name="cell-deceased">{{ data.total.deceased|default:0 }}</td>
-		        		<td name="cell-tested">{{ data.total.tested|default:0 }}</td>
-		        	</tr>
+	        	{% for district, total in both.items %}
+	        	<tr>
+	        		<td>{{ district }}</td>
+	        		<td>{{ total|get_item:"confirmed" }}</td>
+	        		<td>{{ total|get_active }}</td>
+	        		<td>{{ total|get_item:"recovered" }}</td>
+	        		<td>{{ total|get_item:"deceased" }}</td>
+	        		<td>{{ total|get_item:"tested" }}</td>
+	        	</tr>
 	        	{% endfor %}
 	        </tbody>
 	</table>
