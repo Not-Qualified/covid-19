@@ -36,7 +36,7 @@
 </style>
 
 <div class="row">
-	<div class="col-sm">	
+	<div class="col-sm-6 col-md-6 col-lg-3">	
 		<div class="card card-1 border-danger mb-3" style="max-width: 18rem;">
 			<div class="card-header" style="border-radius: 75px;">Confirmed</div>
 				<div class="card-body">
@@ -46,17 +46,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm">
+	<div class="col-sm-6 col-md-6 col-lg-3">
 		<div class="card card-2 border-primary mb-3" style="max-width: 18rem;">
 			<div class="card-header" style="border-radius: 75px;">Active</div>
 				<div class="card-body">
 				<h2 class="card-title text-primary text-center"><span class="Count">{{ state_list.Total_Testing.total.confirmed|default:0 }}</span></h2>
+				<!-- <h2 class="card-title text-primary text-center"><span class="Count">{{ active }}</span></h2> -->
 				<h5 class="card-title text-primary text-center">+<span class="Count">{{ state_list.Total_Testing.delta.active|default:0 }}</span></h5>
 				<p class="card-text"></p>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm">
+	<div class="col-sm-6 col-md-6 col-lg-3">
 		<div class="card card-3 border-success mb-3" style="max-width: 18rem;">
 			<div class="card-header" style="border-radius: 75px;">Recovered</div>
 				<div class="card-body">
@@ -66,12 +67,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm">
-		<div class="card card-4 border-secondary mb-3" style="max-width: 18rem;">
+	<div class="col-sm-6 col-md-6 col-lg-3">
+		<div class="card card-4 border-light mb-3" style="max-width: 18rem;">
 			<div class="card-header" style="border-radius: 75px;">Deceased</div>
 				<div class="card-body">
-				<h2 class="card-title text-secondary text-center"><span class="Count">{{ state_list.Total_Testing.total.deceased|default:0 }}</span></h2>
-				<h5 class="card-title text-secondary text-center">+<span class="Count">{{ state_list.Total_Testing.delta.deceased|default:0 }}</span></h5>
+				<h2 class="card-title text-black-50 text-center"><span class="Count">{{ state_list.Total_Testing.total.deceased|default:0 }}</span></h2>
+				<h5 class="card-title text-black-50 text-center">+<span class="Count">{{ state_list.Total_Testing.delta.deceased|default:0 }}</span></h5>
 				<p class="card-text"></p>
 			</div>
 		</div>

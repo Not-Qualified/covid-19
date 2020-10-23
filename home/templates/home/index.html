@@ -72,46 +72,136 @@ table tbody tr td a {
 
 	<script type="text/javascript">
 
-		var ctxD = document.getElementById("doughnutChart").getContext('2d');
-		var confirmed = [], deceased = [], recovered = [], others = [], tested = [];
-		var clabel = [];
+		var delta = document.getElementById("deltaChart").getContext('2d');
+		var total = document.getElementById("totalChart").getContext('2d');
 
-		var myLineChart = new Chart(ctxD, {
-			type: 'line',
-			data: {
-			labels: {{ confirmed }},
+		var deltabarChartData = {
 			datasets: [{
 				label: "confirmed",
+				hoverBackgroundColor: "#ef9a9a",
 				borderColor: "red",
-				data: {{ confirmed }},
+				borderWidth: 1,
+				data: [
+					{{ confirmed }}
+				]
+			}, 
+			{
+				label: 'active',
+				borderColor: "blue",
+				hoverBackgroundColor: "#bbdefb",
+				borderWidth: 1,
+				data: [
+					{{ active }}
+				]
 			},
 			{
-				label: "deceased",
-				borderColor: "grey",
-				data: {{ deceased }},
-			},
-			{
-				label: "recovered",
+				label: 'recovered',
 				borderColor: "green",
-				data: {{recovered}},
+				hoverBackgroundColor: "#81c784",
+				borderWidth: 1,
+				data: [
+					{{ recovered }}
+				]
 			},
-			// {
-			// 	label: "others",
-			// 	borderColor: "yellow",
-			// 	data: {{others}},
-			// },
 			{
-				label: "tested",
-				borderColor: "orange",
-				data: {{tested}},
-			}
-		]
-	},
-			options: {
-				responsive: true,
-				
-		}
-	});
-		console.log(confirmed, clabel);
+				label: 'deceased',
+				borderColor: "grey",
+				hoverBackgroundColor: "#e0e0e0",
+				borderWidth: 1,
+				data: [
+					{{ deceased }}
+				]
+			}, 
+			{
+				label: 'others',
+				borderColor: "yellow",
+				hoverBackgroundColor: "#fff176",
+				borderWidth: 1,
+				data: [
+					{{ other }}
+				]
+			},
+			]}
+
+
+		var myBarChart = new Chart(delta, {
+		    type: 'bar',
+		    data: deltabarChartData,
+		    options: {
+						responsive: true,
+						legend: {
+							position: 'top',
+						},
+						title: {
+							display: true,
+							text: 'Delta COVID Cases'
+						}
+					}
+		});	
+
+
+		var totalbarChartData = {
+			datasets: [{
+				label: "confirmed",
+				hoverBackgroundColor: "#ef9a9a",
+				borderColor: "red",
+				borderWidth: 1,
+				data: [
+					{{ state_list.Total_Testing.total.confirmed|default:0 }}
+				]
+			}, 
+			{
+				label: 'active',
+				borderColor: "blue",
+				hoverBackgroundColor: "#bbdefb",
+				borderWidth: 1,
+				data: [
+					{{ state_list.Total_Testing.total.confirmed|default:0 }}
+				]
+			},
+			{
+				label: 'recovered',
+				borderColor: "green",
+				hoverBackgroundColor: "#81c784",
+				borderWidth: 1,
+				data: [
+					{{ state_list.Total_Testing.total.recovered|default:0 }}
+				]
+			},
+			{
+				label: 'deceased',
+				borderColor: "grey",
+				hoverBackgroundColor: "#e0e0e0",
+				borderWidth: 1,
+				data: [
+					{{ state_list.Total_Testing.total.deceased|default:0 }}
+				]
+			}, 
+			// {
+			// 	label: 'others',
+			// 	borderColor: "yellow",
+			// 	hoverBackgroundColor: "#fff176",
+			// 	borderWidth: 1,
+			// 	data: [
+			// 		{{ state_list.Total_Testing.total.others|default:0 }}
+			// 	]
+			// },
+			]}
+
+
+		var myBarChart = new Chart(total, {
+		    type: 'bar',
+		    data: totalbarChartData,
+		    options: {
+						responsive: true,
+						legend: {
+							position: 'top',
+						},
+						title: {
+							display: true,
+							text: 'Total COVID Cases - Graph Representation'
+						}
+					}
+		});	
 	</script>
 {% endblock script %}

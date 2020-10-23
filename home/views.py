@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
 import requests
+import datetime
 from .states import states_dict
 from .models import HospitalRegister, VaccineUpdatePost
 from .forms import VaccineUpdateForm, HospitalRegisterForm
@@ -31,29 +32,44 @@ def home_view(request, *args, **kwargs):
 			if st == "TT":
 				for i, dt in dates.items():
 					for date, data in dt.items():
-						DATES.append(date)
 						if "delta" in data:
+							DATES.append(str(date).format(datetime.datetime.now()))
 							if "confirmed" in data["delta"]:
 								confirmed.append(data["delta"]["confirmed"])
+							else:
+								confirmed.append(0)
 							if "deceased" in data["delta"]:
 								deceased.append(data["delta"]["deceased"])
+							else:
+								deceased.append(0)
 							if "other" in data["delta"]:
 								other.append(data["delta"]["other"])
+							else:
+								other.append(0)
 							if "recovered" in data["delta"]:
 								recovered.append(data["delta"]["recovered"])
+							else:
+								recovered.append(0)
 							if "tested" in data["delta"]:
 								tested.append(data["delta"]["tested"])
-		# print(DATES)
-		# print(len(DATES))
+							else:
+								tested.append(0)
+						if date == datetime.datetime.now().strftime("%Y-%m-%d"):
+							print(date)	
+			else:
+				for i, dt in dates.items():
+					for date, data in dt.items():
+						pass
+
 		context = {
 			"state_list": state_list,
-			# "timeseries": timeseries,
-			"confirmed": confirmed,
-			"deceased": deceased,
-			"other": other,
-			"recovered": recovered,
-			"tested": tested,
+			"confirmed": confirmed[-1],
+			"deceased": deceased[-1],
+			"other": other[-1],
+			"recovered": recovered[-1],
+			"tested": tested[-1],
 			"dates": DATES,
+			"active": confirmed[-1] - (recovered[-1] + deceased[-1] + other[-1]),
 		}
 		return render(request, "home/index.html", context)
 
