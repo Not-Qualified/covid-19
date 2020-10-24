@@ -20,4 +20,4 @@ def get_active(dict):
 	if "confirmed" in dict and "recovered" in dict and "deceased" in dict:
 		return dict["confirmed"] - (dict["recovered"] + dict["deceased"])
 	else:
-		pass
+		return None

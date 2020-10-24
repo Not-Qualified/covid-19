@@ -82,21 +82,17 @@ def district_view(request, state=None, *args, **kwargs):
 
 	chain = chain.json()
 
-	districts, total, confirmed, recovered, deceased, tested = [], [], [], [], [], []
+	# districts, total, confirmed, recovered, deceased, tested = [], [], [], [], [], []
 	both = {}
 	for state_code, data in chain.items():
 		if(state_code == state):
 			for district_name, data in data["districts"].items():
-				districts.append(district_name)
-				total.append(data["total"])
 				both[district_name] = data["total"]
 
 	state_detail = chain[state]
 
 	context = {
 		"state_detail": state_detail,
-		"districts": districts,
-		"total": total,
 		"both": both,
 	}
 
