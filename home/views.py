@@ -138,3 +138,7 @@ def sitemap_view(request, *args, **kwagrs):
 	response = HttpResponse(t.render(), content_type="application/xml")
 	response['Content-Disposition'] = 'filename=...'
 	return response
+
+
+def privacy_policy_view(request, *args, **kwagrs):
+	return render(request, "privacy-policy.html")

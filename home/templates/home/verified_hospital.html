@@ -24,21 +24,21 @@
 	        	{% for hospital in object_list %}
 	        	{% if hospital.verified %}
 	        		<tr>
-	        			<td>{{ hospital.state }}</td>
-	        			<td>{{ hospital.district }}</td>
-	        			<td>{{ hospital.city }}</td>
-	        			<td>{{ hospital.hospital_name }}</td>
-	        			<td>{{ hospital.insurance_facility }}</td>
-	        			<td>{{ hospital.ventilator_facility }}</td>
-	        			<td>{{ hospital.number_of_beds }}</td>
-	        			<td>{{ hospital.hospital_contact_number }}</td>
-	        			<td>{{ hospital.hospital_email }}</td>
-	        			<td>
+	        			<td style="vertical-align: middle;">{{ hospital.state }}</td>
+	        			<td style="vertical-align: middle;">{{ hospital.district }}</td>
+	        			<td style="vertical-align: middle;">{{ hospital.city }}</td>
+	        			<td style="vertical-align: middle;">{{ hospital.hospital_name }}</td>
+	        			<td style="vertical-align: middle;">{{ hospital.insurance_facility }}</td>
+	        			<td style="vertical-align: middle;">{{ hospital.ventilator_facility }}</td>
+	        			<td style="vertical-align: middle;">{{ hospital.number_of_beds }}</td>
+	        			<td style="vertical-align: middle;">{{ hospital.hospital_contact_number }}</td>
+	        			<td style="vertical-align: middle;">{{ hospital.hospital_email }}</td>
+	        			<td style="vertical-align: middle;">
 	        				<a href="{{ hospital.hospital_website }}" target="_blank">
 	        					{{ hospital.hospital_website }}
 	        				</a>
 	        			</td>
-	        			<td>{{ hospital.address|linebreaks }}</td>
+	        			<td style="vertical-align: middle;">{{ hospital.address.strip|linebreaks }}</td>
 	        			<!-- <td>{{ hospital. }}</td> -->
 	        		</tr>
 	        	{% endif %}

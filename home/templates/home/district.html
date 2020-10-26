@@ -4,31 +4,35 @@
 
 {% block content %}
 
-<div class="table-responsive">
-	<table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
-	        <thead class="thead-dark">
-	            <tr>
-	                <th>District Name</th>
-	                <th>Confirmed</th>
-	                <th>Active</th>
-	                <th>Recovered</th>
-	                <th>Deceased</th>
-	                <th>Tested</th>
-	            </tr>
-	        </thead>
-	        <tbody>
-	        	{% for district, total in both.items %}
-	        	<tr>
-	        		<td>{{ district }}</td>
-	        		<td>{{ total|get_item:"confirmed" }}</td>
-	        		<td>{{ total|get_active }}</td>
-	        		<td>{{ total|get_item:"recovered" }}</td>
-	        		<td>{{ total|get_item:"deceased" }}</td>
-	        		<td>{{ total|get_item:"tested" }}</td>
-	        	</tr>
-	        	{% endfor %}
-	        </tbody>
-	</table>
+<div class="row justify-content-center">
+	<div class="col-10 col-sm-10 col-md-8">
+		<div class="table-responsive">
+			<table id="example" class="display table table-striped table-bordered table-hover" style="width:100%">
+			        <thead class="thead-dark">
+			            <tr>
+			                <th>District Name</th>
+			                <th>Confirmed</th>
+			                <th>Active</th>
+			                <th>Recovered</th>
+			                <th>Deceased</th>
+			                <th>Tested</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	{% for district, total in both.items %}
+			        	<tr>
+			        		<td>{{ district }}</td>
+			        		<td>{{ total|get_item:"confirmed" }}</td>
+			        		<td>{{ total|get_active }}</td>
+			        		<td>{{ total|get_item:"recovered" }}</td>
+			        		<td>{{ total|get_item:"deceased" }}</td>
+			        		<td>{{ total|get_item:"tested" }}</td>
+			        	</tr>
+			        	{% endfor %}
+			        </tbody>
+			</table>
+		</div>
+	</div>
 </div>
 {% endblock content %}
 
