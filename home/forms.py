@@ -88,7 +88,7 @@ class VaccineUpdateForm(forms.ModelForm):
 class HospitalRegisterForm(forms.ModelForm):
 	name = forms.CharField(max_length=150, 
 							widget=forms.TextInput(
-								attrs={"class": "form-control", }, ), )
+								attrs={"class": "form-control validate", }, ), )
 	mobile_number = forms.CharField(
 							widget=forms.NumberInput(
 								attrs={"class": "form-control", 
@@ -105,7 +105,7 @@ class HospitalRegisterForm(forms.ModelForm):
 								attrs={"class": "custom-select district", }, ), )
 	city = forms.CharField(max_length=100, required=False,
 							widget=forms.TextInput(
-								attrs={"class": "custom-select", }, ), )
+								attrs={"class": "form-control", }, ), )
 
 	hospital_name = forms.CharField(max_length=250, 
 							widget=forms.TextInput(
@@ -131,8 +131,9 @@ class HospitalRegisterForm(forms.ModelForm):
 								attrs={"class": "custom-select", }, ), )
 
 	address = forms.CharField(max_length=500, 
-							widget=forms.TextInput(
-								attrs={"class": "form-control", }, ), )
+							widget=forms.Textarea(
+								attrs={"class": "md-textarea form-control", 
+										"rows": "3"}, ), )
 	hospital_website = forms.CharField(max_length=500, required=False,
 							widget=forms.URLInput(
 								attrs={"class": "form-control", }, ), )
@@ -145,6 +146,7 @@ class HospitalRegisterForm(forms.ModelForm):
 			"email", 
 			"state", 
 			"district", 
+			"city",
 			"hospital_name", 
 			"number_of_beds", 
 			"hospital_contact_number", 

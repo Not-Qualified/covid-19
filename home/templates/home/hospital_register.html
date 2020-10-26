@@ -2,138 +2,144 @@
 {% load static %}
 
 {% block content %}
-	<form method="POST" action=".">
-	{% csrf_token %}
-	<h3>Personal Information :</h3>
-	<hr />
-	<div class="row">
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.name }}
-			<label>{{ form.name.label }}</label>
-			<span class="text-danger">{{ form.name.errors }}</span>
+<div class="row justify-content-center">
+	<div class="col-10 col-sm-10 col-md-8">
+		<form method="POST" action=".">
+		{% csrf_token %}
+		<h3>Personal Information :</h3>
+		<hr />
+		<div class="row">
+			<div class="col-sm">
+				<div class="md-form mb-5">
+					{{ form.name }}
+					{{ form.name.label_tag|cut:":" }}
+					<span class="text-danger">{{ form.name.errors }}</span>
+				</div>
+			</div>
+
+			<div class="col-sm">
+				<div class="md-form mb-5">
+				{{ form.mobile_number }}
+				{{ form.mobile_number.label_tag|cut:":" }}
+				<span class="text-danger">{{ form.mobile_number.errors }}</span>
+				</div>
+			</div>
+
+			<div class="col-sm">
+				<div class="md-form mb-5">
+				{{ form.email }}
+				{{ form.email.label_tag|cut:":" }}
+				<span class="text-danger">{{ form.email.errors }}</span>
+				</div>
 			</div>
 		</div>
 
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.mobile_number }}
-			<label>{{ form.mobile_number.label }}</label>
-			<span class="text-danger">{{ form.mobile_number.errors }}</span>
-			</div>
-		</div>
-
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.email }}
-			<label>{{ form.email.label }}</label>
-			<span class="text-danger">{{ form.email.errors }}</span>
-			</div>
-		</div>
-	</div>
-
-	<h3>Hospital Information :</h3>
-	<hr />
-	
-	<div class="row">	
-		<div class="col-sm">
-			<!-- <div class="md-form mb-5"> -->
-			<label>{{ form.state.label }}</label>
-			{{ form.state }}
-			<span class="text-danger">{{ form.state.errors }}</span>
-			<!-- </div> -->
-		</div>
-	
-		<div class="col-sm">
-			<!-- <div class="md-form mb-5"> -->
-			<label>{{ form.district.label }}</label>
-			{{ form.district }}
-			<span class="text-danger">{{ form.district.errors }}</span>
-			<!-- </div> -->
-		</div>
+		<h3>Hospital Information :</h3>
+		<hr />
 		
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.city }}
-			<label>{{ form.city.label }}</label>
-			<span class="text-danger">{{ form.city.errors }}</span>
+		<div class="row">	
+			<div class="col-sm">
+				<!-- <div class="md-form mb-5"> -->
+				{{ form.state.label_tag|cut:":" }}
+				{{ form.state }}
+				<span class="text-danger">{{ form.state.errors }}</span>
+				<!-- </div> -->
 			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.hospital_name }}
-			<label>{{ form.hospital_name.label }}</label>
-			<span class="text-danger">{{ form.hospital_name.errors }}</span>
-			</div>
-		</div>	
-	</div>
 		
-	<div class="row mt-4">
-		<div class="col-sm">
-			<!-- <div class="md-form mb-5"> -->
-			<label>{{ form.insurance_facility.label }}</label>
-			{{ form.insurance_facility }}
-			<span class="text-danger">{{ form.insurance_facility.errors }}</span>
-			<!-- </div> -->
-		</div>
-		
-		<div class="col-sm">
-			<!-- <div class="md-form mb-5"> -->
-			<label>{{ form.ventilator_facility.label }}</label>
-			{{ form.ventilator_facility }}
-			<span class="text-danger">{{ form.ventilator_facility.errors }}</span>
-			<!-- </div> -->
-		</div>
-
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.number_of_beds }}
-			<label>{{ form.number_of_beds.label }}</label>
-			<span class="text-danger">{{ form.number_of_beds.errors }}</span>
+			<div class="col-sm">
+				<!-- <div class="md-form mb-5"> -->
+				{{ form.district.label_tag|cut:":" }}
+				{{ form.district }}
+				<span class="text-danger">{{ form.district.errors }}</span>
+				<!-- </div> -->
+			</div>
+			
+			<div class="col-sm">
+				<div class="md-form mb-5">
+				{{ form.city }}
+				{{ form.city.label_tag|cut:":" }}
+				<span class="text-danger">{{ form.city.errors }}</span>
+				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-sm">
+				<div class="md-form mb-5">
+				{{ form.hospital_name }}
+				{{ form.hospital_name.label_tag|cut:":" }}
+				<span class="text-danger">{{ form.hospital_name.errors }}</span>
+				</div>
+			</div>	
+		</div>
+			
+		<div class="row mt-4">
+			<div class="col-sm">
+				<!-- <div class="md-form mb-5"> -->
+				{{ form.insurance_facility.label_tag|cut:":" }}
+				{{ form.insurance_facility }}
+				<span class="text-danger">{{ form.insurance_facility.errors }}</span>
+				<!-- </div> -->
+			</div>
+			
+			<div class="col-sm">
+				<!-- <div class="md-form mb-5"> -->
+				{{ form.ventilator_facility.label_tag|cut:":" }}
+				{{ form.ventilator_facility }}
+				<span class="text-danger">{{ form.ventilator_facility.errors }}</span>
+				<!-- </div> -->
+			</div>
+
+			<div class="col-sm">
+				<div class="md-form mb-5">
+				{{ form.number_of_beds }}
+				{{ form.number_of_beds.label_tag|cut:":" }}
+				<span class="text-danger">{{ form.number_of_beds.errors }}</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm">
+				<div class="md-form mb-5">
+				{{ form.hospital_contact_number }}
+				{{ form.hospital_contact_number.label_tag|cut:":" }}
+				<span class="text-danger">{{ form.hospital_contact_number.errors }}</span>
+				</div>
+			</div>
+			
+			<div class="col-sm">
+				<div class="md-form mb-5">
+				{{ form.hospital_email }}
+				{{ form.hospital_email.label_tag|cut:":" }}
+				<span class="text-danger">{{ form.hospital_email.errors }}</span>
+				</div>
+			</div>
+			
+			<div class="col-sm">
+				<div class="md-form mb-5">
+				{{ form.hospital_website }}
+				{{ form.hospital_website.label_tag|cut:":" }}
+				<span class="text-danger">{{ form.hospital_website.errors }}</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm">
+				<div class="md-form mb-5">
+				{{ form.address }}
+				{{ form.address.label_tag|cut:":" }}
+				<span class="text-danger">{{ form.address.errors }}</span>
+				</div>
+			</div>
+		</div>
+
+		<button class="btn blue-gradient btn-rounded z-depth-1a">Submit</button>
+
+		</form>
 	</div>
-
-	<div class="row">
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.hospital_contact_number }}
-			<label>{{ form.hospital_contact_number.label }}</label>
-			<span class="text-danger">{{ form.hospital_contact_number.errors }}</span>
-			</div>
-		</div>
-		
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.hospital_email }}
-			<label>{{ form.hospital_email.label }}</label>
-			<span class="text-danger">{{ form.hospital_email.errors }}</span>
-			</div>
-		</div>
-		
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.hospital_website }}
-			<label>{{ form.hospital_website.label }}</label>
-			<span class="text-danger">{{ form.hospital_website.errors }}</span>
-			</div>
-		</div>
-
-		<div class="col-sm">
-			<div class="md-form mb-5">
-			{{ form.address }}
-			<label>{{ form.address.label }}</label>
-			<span class="text-danger">{{ form.address.errors }}</span>
-			</div>
-		</div>
-	</div>
-
-	<button class="btn blue-gradient btn-rounded z-depth-1a">Submit</button>
-
-	</form>
+</div>
 {% endblock content %}
 
 {% block script %}

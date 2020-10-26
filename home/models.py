@@ -65,7 +65,7 @@ class HospitalRegister(models.Model):
 											choices=FACILITY_CHOICES, 
 											default="YES", )
 
-	address = models.CharField(max_length=500, )
+	address = models.TextField(max_length=500, )
 	hospital_website = models.URLField(max_length=500, null=True, blank=True, )
 
 	def __str__(self):
