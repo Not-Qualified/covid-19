@@ -1,3 +1,4 @@
+from django.template.loader import get_template
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
@@ -130,3 +131,10 @@ def verified_hospital_view(request, *args, **kwagrs):
 		"object_list": HospitalRegister.objects.all()
 	}
 	return render(request, "home/verified_hospital.html", context)
+
+
+def sitemap_view(request, *args, **kwagrs):
+	t = get_template('home/sitemap.xml')
+	response = HttpResponse(t.render(), content_type="application/xml")
+	response['Content-Disposition'] = 'filename=...'
+	return response

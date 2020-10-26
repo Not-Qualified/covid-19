@@ -71,3 +71,10 @@ class HospitalRegister(models.Model):
 	def __str__(self):
 		return f"""{self.hospital_name} - {self.number_of_beds} - 
 					{self.hospital_contact_number} - {self.hospital_email}"""
+
+
+class HitCounter(models.Model):
+	hit_count = models.BigIntegerField(default=0, )
+
+	def __str__(self):
+		return f"Total Views : {self.hit_count}"
