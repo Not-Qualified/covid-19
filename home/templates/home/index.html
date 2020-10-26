@@ -4,9 +4,36 @@
 
 {% block content %}
 <style type="text/css">
-table tbody tr td a {
+table tbody tr th a {
   text-decoration: underline;
 }
+/*table tbody tr td, table tbody tr th, table thead tr th
+{
+	border: 1px solid rgb(244, 244, 247);
+	color: #494c4f;
+	border-radius: 10px;
+	background: rgb(246, 246, 247);
+}
+table
+{
+	border-spacing: 3px !important;
+	border-collapse: separate;
+	color: white;
+}
+tr:hover
+{
+	background-color: #f5f5f5;
+}
+td
+{
+	border-radius: 10px !important;
+	background-color: rgb(246, 246, 247);
+}
+td:hover
+{
+	border-radius: 10px !important;
+	background-color: rgb(246, 246, 240);
+}*/
 </style>
 
 {% include "home/cards.html" %}
@@ -14,23 +41,23 @@ table tbody tr td a {
 <div class="row">
 	<div class="col-sm-12 col-md-8">
 		<div class="table-responsive">
-			<table id="example" class="display table table-sm table-striped table-borderless table-hover" style="width:100%">
-			        <thead class="thead-dark">
+			<table id="example" class="table table-sm table-hover table-striped" style="width:100%"><!-- table-sm table-striped table-borderless table-hover -->
+			        <thead class=""><!-- thead-dark -->
 			            <tr>
-			                <th>State Name</th>
-			                <th>Confirmed</th>
-			                <th>Active</th>
-			                <th>Recovered</th>
-			                <th>Deceased</th>
-			                <th>Tested</th>
-			                <th>Population</th>
+			                <th scope="col">State Name</th>
+			                <th scope="col">Confirmed</th>
+			                <th scope="col">Active</th>
+			                <th scope="col">Recovered</th>
+			                <th scope="col">Deceased</th>
+			                <th scope="col">Tested</th>
+			                <th scope="col">Population</th>
 			            </tr>
 			        </thead>
 			        <tbody>
 			        	{% for state, data in state_list.items %}
 			        	{% if not "Total_Testing" == state %}
 				        	<tr>
-				        		<td><a href="/{{ data.code }}/">{{ state }}</a></td>
+				        		<th scope="row"><a href="/{{ data.code }}/">{{ state }}</a></th>
 				        		<td>{{ data.total.confirmed|intcomma_indian|default:0 }}</td>
 				        		<td>{{ data.total.confirmed|sub:data.total.recovered }}</td>
 				        		<td>{{ data.total.recovered|intcomma_indian|default:0 }}</td>

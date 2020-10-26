@@ -76,15 +76,15 @@
 			<h3 class="mt-5 text-primary"><p><u>{{ post.title }}</p></u></h3>
 		</a>
 		<h4>
-			<span class="badge badge-primary">{{ post.date_added|date:"F d, Y - h:i A" }}</span>
+			<span class="badge badge-primary">{{ post.date_added|date:"F d, Y" }}</span><!--  - h:i A -->
 			<a href="{{ post.link }}" target="_blank">
 				<span class="badge badge-warning">Source : {{ post.source }}</span>
 			</a>
 			<!-- <br /> -->
-			<a href="{{ post.link }}" target="_blank" class="btn /*btn-sm*/ btn-secondary btn-rounded z-depth-1a">Link</a>
+			<!-- <a href="{{ post.link }}" target="_blank" class="btn /*btn-sm*/ btn-secondary btn-rounded z-depth-1a">Link</a> -->
 		</h4>
 		<div class="container">
-			<!-- <p class="mt-3">{{ post.description }}</p> -->
+			<p class="mt-3">{{ post.description }}</p>
 		</div>
 		<hr></hr>
 	{% endfor %}
