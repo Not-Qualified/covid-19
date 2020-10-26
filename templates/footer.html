@@ -27,12 +27,7 @@
 	<!-- Copyright -->
 		<div class="footer-copyright text-center py-3">
 
-			<span class="h5-responsive mr-3"> Total Visitor : </span>
-				{% for i in total_hit|make_list %}
-					<span class="counter">{{ i }}</span>
-				{% endfor %}
-
-			<!-- <span class="text-success">{{ total_hit }}</span> -->
+			
 			<br />
 			<a class="h5-responsive mr-3" href="{% url 'sitemap_view' %}">Sitemap</a>
 			<a class="h5-responsive mr-3" href="">About</a>
