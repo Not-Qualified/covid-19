@@ -1,21 +1,40 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
 
+from PIL import Image
+
 # Create your models here.
 
 mobile_regex = RegexValidator(regex=r"^\d{10}$", 
 									message="Mobile Number Enter in 10 Digit Formate")
+
+landline_regex = RegexValidator(regex=r"^\d{12}$", 
+									message="LandLine Number Enter in 12 Digit Formate - If It's less than 12 Digit try with leading number as 0 and make it 12")
+
 FACILITY_CHOICES = [("YES", "Yes"), ("NO", "No"), ]
 
 class VaccineUpdatePost(models.Model):
 	title = models.CharField(max_length=500, )
 	link = models.URLField(max_length=700, )
 	source = models.CharField(max_length=250, )
+	image = models.ImageField(upload_to="post_images", null=True, blank=True, )
 	description = models.TextField(null=True, blank=True, )
 	date_added = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return f"{self.title}"
+
+	def save(self, *args, **kwargs):
+		super().save(*args, **kwargs)
+		img = Image.open(self.image.path)
+		img.thumbnail((1024, 768), Image.ANTIALIAS)
+		img.save(self.image.path)
+
+	def delete(self, *args, **kwargs):
+		storage, path = self.image.storage, self.image.path
+		super().delete(*args, *kwargs)
+		storage.delete(path)
+
 
 class VaccineUpdate(models.Model):
 	""" Vaccine Update Model for Vaccine Update List """
@@ -34,6 +53,7 @@ class VaccineUpdate(models.Model):
 
 	email = models.EmailField(null=True, blank=True, )
 	mobile_number = models.CharField(max_length=10, validators=[mobile_regex, ])
+	landline_number = models.CharField(max_length=12, validators=[landline_regex, ], null=True, blank=True, )
 
 	def __str__(self):
 		return f"{self.name} - {self.email} - {self.mobile_number}"
@@ -55,6 +75,7 @@ class HospitalRegister(models.Model):
 											MinValueValidator(limit_value=1,
 											message="Must be Greater than Zero"), ])
 	hospital_contact_number = models.CharField(max_length=10, validators=[mobile_regex, ])
+	hospital_landline = models.CharField(max_length=12, validators=[landline_regex, ], null=True, blank=True, )
 	hospital_email = models.EmailField(null=True, blank=True, )
 
 

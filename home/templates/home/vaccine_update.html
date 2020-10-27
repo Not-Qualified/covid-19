@@ -52,18 +52,25 @@
 			</div>
 
 			<div class="row">
-				<div class="col col-sm-6">
+				<div class="col col-sm-4">
 					<div class="md-form mb-3">
 						{{ form.email }}
 						{{ form.email.label_tag|cut:":" }}
 						<span class="text-danger">{{ form.email.errors }}</span>
 					</div>
 				</div>
-				<div class="col col-sm-6">
+				<div class="col col-sm-4">
 					<div class="md-form mb-3">
 						{{ form.mobile_number }}
 						{{ form.mobile_number.label_tag|cut:":" }}
 						<span class="text-danger">{{ form.mobile_number.errors }}</span>
+					</div>
+				</div>
+				<div class="col col-sm-4">
+					<div class="md-form mb-3">
+						{{ form.landline_number }}
+						{{ form.landline_number.label_tag|cut:":" }}
+						<span class="text-danger">{{ form.landline_number.errors }}</span>
 					</div>
 				</div>
 			</div>
@@ -86,9 +93,10 @@
 				<a href="{{ post.link }}" target="_blank">
 					<span class="badge badge-warning">Source : {{ post.source }}</span>
 				</a>
-				<!-- <br /> -->
-				<!-- <a href="{{ post.link }}" target="_blank" class="btn /*btn-sm*/ btn-secondary btn-rounded z-depth-1a">Link</a> -->
 			</h4>
+			{% if post.image %}
+			<img src="{{ post.image.url }}" class="img-fluid rounded" alt="Responsive image" style="min-height:350px;height:350px;">
+			{% endif %}
 			<div class="container">
 				<p class="mt-3">{{ post.description }}</p>
 			</div>

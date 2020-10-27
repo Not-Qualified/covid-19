@@ -1,4 +1,3 @@
-from django.contrib.sitemaps.views import sitemap
 from django.urls import path
 from .views import (home_view, 
 					district_view, 

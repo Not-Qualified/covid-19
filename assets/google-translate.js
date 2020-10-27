@@ -23,6 +23,41 @@ $('document').ready(function () {
     $('iframe').contents().find('.goog-te-menu2-item').css('width', '100%')
     $('iframe').contents().find('td').css('width', '100%')
 
+    console.log($('iframe').contents().find('.goog-te-menu2-item div').html())
+
+    $('iframe').contents().find('.goog-te-menu2-item div').html(function () {
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Hindi') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('हिंदी')
+      }
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Gujarati') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('ગુજરાતી')
+      }
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Bengali') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('বাংলা')
+      }
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Kannada') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('ಕನ್ನಡ')
+      }
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Malayalam') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('മലയാളം')
+      }
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Marathi') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('मराठी')
+      }
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Punjabi') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('ਪੰਜਾਬੀ')
+      }
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Tamil') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('தமிழ்')
+      }
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Telugu') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('తెలుగు')
+      }
+      if ($(this).css('background-color', '#4385F5').find('span.text').html() == 'Odia (Oriya)') {
+        $(this).css('background-color', '#4385F5').find('span.text').html('ଓଡିଆ')
+      }
+    })
+
     // Change hover effects
     $('iframe').contents().find('.goog-te-menu2-item div').hover(function () {
       $(this).css('background-color', '#4385F5').find('span.text').css('color', 'white')
@@ -42,6 +77,7 @@ $('document').ready(function () {
       width: '100%',
       top: '0px'
     })
+
     // Change iframes's size
     $('iframe').contents().find('.goog-te-menu2').css({
       height: '100%',

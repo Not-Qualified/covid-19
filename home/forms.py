@@ -72,6 +72,10 @@ class VaccineUpdateForm(forms.ModelForm):
 							widget=forms.NumberInput(attrs={"class": "form-control", 
 															"max": 9999999999, 
 															"onKeyPress": "if(this.value.length==10) return false;"}))
+	landline_number = forms.CharField(
+							widget=forms.NumberInput(attrs={"class": "form-control", 
+															"max": 999999999999, 
+															"onKeyPress": "if(this.value.length==12) return false;"}))
 
 	class Meta:
 		model = VaccineUpdate
@@ -82,6 +86,7 @@ class VaccineUpdateForm(forms.ModelForm):
 			"district",
 			"email",
 			"mobile_number",
+			"landline_number",
 		]
 
 
@@ -138,6 +143,11 @@ class HospitalRegisterForm(forms.ModelForm):
 							widget=forms.URLInput(
 								attrs={"class": "form-control", }, ), )
 
+	hospital_landline = forms.CharField(
+							widget=forms.NumberInput(attrs={"class": "form-control", 
+															"max": 999999999999, 
+															"onKeyPress": "if(this.value.length==12) return false;"}))
+
 	class Meta:
 		model = HospitalRegister
 		fields = [
@@ -155,4 +165,5 @@ class HospitalRegisterForm(forms.ModelForm):
 			"ventilator_facility", 
 			"address", 
 			"hospital_website", 
+			"hospital_landline",
 		]

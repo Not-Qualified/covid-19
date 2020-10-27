@@ -35,11 +35,11 @@ body {
 
 #google_translate_element {
   position: absolute;
-  bottom: calc(53px + 16px);
+  /*bottom: calc(53px + 16px);*/
   right: 16px !important;
   z-index: 99999;
 }
-/*.goog-te-gadget {
+.goog-te-gadget {
   font-family: Roboto, "Open Sans", sans-serif !important;
   text-transform: uppercase;
 }
@@ -83,7 +83,7 @@ body {
 }
 
 .goog-te-gadget-icon {
-  background-image: url(https://placehold.it/32) !important;
+  /*background-image: url(https://placehold.it/32) !important;*/
   background-position: 0px 0px;
   height: 32px !important;
   width: 32px !important;
@@ -100,7 +100,7 @@ body {
 
 @media (max-width: 667px) {
   #google_translate_element {
-    bottom: calc(100% - 50% - 53px);
+    /*bottom: calc(100% - 50% - 53px);*/
     left: 16px !important;
     width: 100% !important;
     .goog-te-gadget {
@@ -110,9 +110,8 @@ body {
       width: 100% !important;
     }
     .goog-te-gadget-simple {
-      width: calc(100% - 32px) !important;
+      /*width: calc(100% - 32px) !important;*/
       text-align: center;
     }
   }
 }
-*/

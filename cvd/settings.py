@@ -142,3 +142,8 @@ STATIC_ROOT = BASE_DIR / "assets"
 
 # Custom User Model Settings
 AUTH_USER_MODEL = "user.User"
+
+
+# Custom Media Serving Settings
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
