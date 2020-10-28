@@ -10,7 +10,7 @@ table tbody tr th a {
 }
 td
 {
-	padding-right: 50px !important;
+	padding-right: 30px !important;
 }
 td:hover {
   background-size:  100% 100%;
@@ -53,7 +53,7 @@ td:hover
 }*/
 </style>
 <div class="row justify-content-center">
-	<div class="col-10 col-sm-10 col-md-10">
+	<div class="col-10 col-sm-10 col-md-8">
 		{% include "home/cards.html" %}
 		<div class="row justify-content-center">
 			<div class="col-sm-12 col-md-8">
@@ -90,13 +90,25 @@ td:hover
 					        	{% endfor %}
 					        </tbody>
 					        <tr>
-					        	<th>India</th>
-					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.confirmed }} </td>
-					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered }} </td>
-					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.recovered }} </td>
-					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.deceased }} </td>
-					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.tested }} </td>
-					        	<td align="right" style="padding-right: 50px !important;">138 Crores</td>
+					        	<th><strong>Total</strong></th>
+					        	<td align="right" style="padding-right: 30px !important;">
+					        		<strong>{{ state_list.Total_Testing.total.confirmed }}</strong>
+					        	</td>
+					        	<td align="right" style="padding-right: 30px !important;">
+					        		<strong>{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered }}</strong>
+					        	</td>
+					        	<td align="right" style="padding-right: 30px !important;">
+					        		<strong>{{ state_list.Total_Testing.total.recovered }}</strong>
+					        	</td>
+					        	<td align="right" style="padding-right: 30px !important;">
+					        		<strong>{{ state_list.Total_Testing.total.deceased }}</strong>
+					        	</td>
+					        	<td align="right" style="padding-right: 30px !important;">
+					        		<strong>{{ state_list.Total_Testing.total.tested }}</strong>
+					        	</td>
+					        	<td align="right" style="padding-right: 30px !important;">
+					        		<strong>138 Crores</strong>
+					        	</td>
 					        </tr>
 					</table>
 				</div>
