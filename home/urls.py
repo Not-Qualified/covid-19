@@ -11,6 +11,6 @@ urlpatterns = [
     path("verified-hospital/", verified_hospital_view, name="verified_hospital_view"),
     path("sitemap.xml", sitemap_view, name="sitemap_view"),
     path("privacy-policy/", privacy_policy_view, name="privacy_policy_view"),
-    path("contact-us/", contact_us_view, name="privacy_policy_view"),
+    path("contact-us/", contact_us_view, name="contact_us_view"),
     path("<str:state>/", district_view, name="district_view"),
 ]
