@@ -8,11 +8,10 @@
 table tbody tr th a {
   text-decoration: underline;
 }
-/*tr:hover {
-  background-size:  100% 100%;
-  transform:scale(1.4545,1.34);
-  transform-origin:center;
-  }*/
+td
+{
+	padding-right: 50px !important;
+}
 td:hover {
   background-size:  100% 100%;
   transform:scale(1.4545,1.34);
@@ -78,18 +77,27 @@ td:hover
 						        		<th scope="row">
 						        			<a href="/{{ data.code }}/">{{ state }}</a>
 						        		</th>
-						        		<td><span class="Count">{{ data.total.confirmed|default:0 }}</span></td>
+						        		<td align="right"><span class="Count">{{ data.total.confirmed|default:0 }}</span></td>
 						        		<!-- <span class="text-danger">{{ data.delta.confirmed }}</span><br /> -->
 						        		<!-- {{ data.delta.confirmed }} -->
-						        		<td class="Count">{{ data.total.confirmed|sub:data.total.recovered }}</td>
-						        		<td class="Count">{{ data.total.recovered|default:0 }}</td>
-						        		<td class="Count">{{ data.total.deceased|default:0 }}</td>
-						        		<td>{{ data.total.tested|floatword_indian|default:0 }}</td>
-						        		<td>{{ data.meta.population|floatword_indian|default:0 }}</td>
+						        		<td class="Count" align="right">{{ data.total.confirmed|sub:data.total.recovered }}</td>
+						        		<td class="Count" align="right">{{ data.total.recovered|default:0 }}</td>
+						        		<td class="Count" align="right">{{ data.total.deceased|default:0 }}</td>
+						        		<td align="right">{{ data.total.tested|floatword_indian|default:0 }}</td>
+						        		<td align="right">{{ data.meta.population|floatword_indian|default:0 }}</td>
 						        	</tr>
 					        	{% endif %}
 					        	{% endfor %}
 					        </tbody>
+					        <tr>
+					        	<th>India</th>
+					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.confirmed }} </td>
+					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered }} </td>
+					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.recovered }} </td>
+					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.deceased }} </td>
+					        	<td align="right" style="padding-right: 50px !important;"> {{ state_list.Total_Testing.total.tested }} </td>
+					        	<td align="right" style="padding-right: 50px !important;">138 Crores</td>
+					        </tr>
 					</table>
 				</div>
 			</div>

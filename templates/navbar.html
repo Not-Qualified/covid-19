@@ -1,3 +1,4 @@
+{% load static %}
 {% url 'home_view' as home_view %}
 {% url 'vaccine_update_view' as vaccine_update_view %}
 {% url 'hospital_register_view' as hospital_register_view %}
@@ -8,7 +9,7 @@
     <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="{{ home_view }}">
-        <img src="https://www.searchpng.com/wp-content/uploads/2018/12/Indian-independence-day-design-with-map.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="{% static 'images/india-navbar-image.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
         Covid-19 India
     </a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">

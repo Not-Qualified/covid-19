@@ -142,3 +142,7 @@ def sitemap_view(request, *args, **kwagrs):
 
 def privacy_policy_view(request, *args, **kwagrs):
 	return render(request, "privacy-policy.html")
+
+
+def contact_us_view(request, *args, **kwagrs):
+	return render(request, "contact-us.html")
