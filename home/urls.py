@@ -13,6 +13,6 @@ urlpatterns = [
     path("privacy-policy/", privacy_policy_view, name="privacy_policy_view"),
     path("contact-us/", contact_us_view, name="contact_us_view"),
     path("sitemap.xml", sitemap_view, name="sitemap_view"),
-    path("robots.xml", TemplateView.as_view(template_name="robots.txt", content_type="text/plain"), name="robots.txt"),
+    path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain"), name="robots.txt"),
     path("<str:state>/", district_view, name="district_view"),
 ]
