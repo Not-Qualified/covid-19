@@ -92,22 +92,22 @@ td:hover
 					        <tr>
 					        	<th><strong>Total</strong></th>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong>{{ state_list.Total_Testing.total.confirmed }}</strong>
+					        		<strong><span class="text-danger">{{ state_list.Total_Testing.total.confirmed }}</span></strong>
 					        	</td>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong>{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered }}</strong>
+					        		<strong><span class="text-primary">{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered }}</span></strong>
 					        	</td>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong>{{ state_list.Total_Testing.total.recovered }}</strong>
+					        		<strong><span class="text-success">{{ state_list.Total_Testing.total.recovered }}</span></strong>
 					        	</td>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong>{{ state_list.Total_Testing.total.deceased }}</strong>
+					        		<strong><span class="text-dark">{{ state_list.Total_Testing.total.deceased }}</span></strong>
 					        	</td>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong>{{ state_list.Total_Testing.total.tested }}</strong>
+					        		<strong><span class="text-warning">{{ state_list.Total_Testing.total.tested }}</span></strong>
 					        	</td>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong>138 Crores</strong>
+					        		<strong><span class="text-info">138 Crores</span></strong>
 					        	</td>
 					        </tr>
 					</table>

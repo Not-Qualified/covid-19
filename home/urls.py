@@ -18,5 +18,8 @@ urlpatterns = [
     path("robots.txt/", 
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"), 
         name="robots.txt"),
+    path("googled9bb73c359cc1dce.html",
+        TemplateView.as_view(template_name="googled9bb73c359cc1dce.html", content_type="text/html"), 
+        name="google-html", ),
     path("<str:state>/", district_view, name="district_view"),
 ]
