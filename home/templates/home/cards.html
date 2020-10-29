@@ -1,6 +1,7 @@
 {% load indian_numbers_tags %}
+{% load mathfilters %}
 <style type="text/css">
-.card{
+.crd-clmn{
     border-radius: 75px;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
@@ -9,72 +10,108 @@
   cursor: pointer;
 }
 
-.card:hover{
+.crd-clmn:hover{
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
-
-/*.card-1:hover
+.crd
 {
-	background-color: #ee858f;
+	align-self: center;
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+.crd-clmn
+{
+	border: 1px solid;
+	border-radius: 20px; /* 20px */
+	margin: 0.30rem;
+	padding: 0.30rem;
+	text-align: center;
+	/*width: inherit;
+	height: inherit;*/
+}
+h2
+{
+	font-weight: 400;
+}
+h5
+{
+	font-weight: 600;
 }
 
-.card-2:hover
+
+@keyframes heartbeat
 {
-	background-color: #92bcea;
+  0%
+  {
+    transform: scale( .30 );
+  }
+  20%
+  {
+    transform: scale( .40 );
+    opacity: 0.4;
+  }
+  40%
+  {
+    transform: scale( .50 );
+  }
+  60%
+  {
+    transform: scale( .60 );
+    opacity: 0.6;
+  }
+  80%
+  {
+    transform: scale( 1 );
+  }
+  100%
+  {
+    transform: scale( 0 );
+    color: #ef9a9a;
+    opacity: 1;
+  }
 }
 
-.card-3:hover
+.heart
 {
-	background-color: #8fe6a3;
+  font-size: 20px !important;
+  color: black;
+  animation: heartbeat 2s infinite;
 }
 
-.card-4:hover
-{
-	background-color: #aebcc8;
-}*/
+
+
 </style>
 
-<div class="row">
-	<div class="col-sm-6 col-md-6 col-lg-3">	
-		<div class="card card-1 border-danger mb-3" style="max-width: 18rem;">
-			<div class="card-header" style="border-radius: 75px;">Confirmed</div>
-				<div class="card-body">
-				<h2 class="card-title text-danger text-center"><span class="Count">{{ state_list.Total_Testing.total.confirmed|default:0 }}</span></h2>
-				<h5 class="card-title text-danger text-center">+<span class="Count">{{ state_list.Total_Testing.delta.confirmed|default:0 }}</span></h5>
-				<p class="card-text"></p>
-			</div>
-		</div>
+
+<div class="d-flex flex-row justify-content-around my-4">
+	<!-- <div class="crd flex-fill"> -->
+	<div class="border border-danger flex-fill crd-clmn ">
+		<div class="mt-2 mb-2 text-danger">Confirmed</div>
+			<h2 class="card-title text-danger"><span class="Count">{{ state_list.Total_Testing.total.confirmed|default:0 }}</span></h2>
+			<h5 class="card-title text-danger">+<span class="Count">{{ state_list.Total_Testing.delta.confirmed|default:0 }}</span></h5>
 	</div>
-	<div class="col-sm-6 col-md-6 col-lg-3">
-		<div class="card card-2 border-primary mb-3" style="max-width: 18rem;">
-			<div class="card-header" style="border-radius: 75px;">Active</div>
-				<div class="card-body">
-				<h2 class="card-title text-primary text-center"><span class="Count">{{ state_list.Total_Testing.total.confirmed|default:0 }}</span></h2>
-				<!-- <h2 class="card-title text-primary text-center"><span class="Count">{{ active }}</span></h2> -->
-				<h5 class="card-title text-primary text-center">+<span class="Count">{{ state_list.Total_Testing.delta.active|default:0 }}</span></h5>
-				<p class="card-text"></p>
-			</div>
-		</div>
+
+	<div class="border border-primary flex-fill crd-clmn ">
+		<div class="mt-2 mb-2 text-primary">Active</div>
+			<i class="heart fa fa-heart"></i>
+			<h2 class="card-title text-primary"><span class="Count">{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered|sub:state_list.Total_Testing.total.deceased }}</span></h2>
+			<h5 class="card-title text-primary">+<span class="Count">{{ state_list.Total_Testing.delta.active|default:0 }}</span></h5>
 	</div>
-	<div class="col-sm-6 col-md-6 col-lg-3">
-		<div class="card card-3 border-success mb-3" style="max-width: 18rem;">
-			<div class="card-header" style="border-radius: 75px;">Recovered</div>
-				<div class="card-body">
-				<h2 class="card-title text-success text-center"><span class="Count">{{ state_list.Total_Testing.total.recovered|default:0 }}</span></h2>
-				<h5 class="card-title text-success text-center">+<span class="Count">{{ state_list.Total_Testing.delta.recovered|default:0 }}</span></h5>
-				<p class="card-text"></p>
-			</div>
-		</div>
+
+	<div class="border border-success flex-fill crd-clmn ">
+		<div class="mt-2 mb-2 text-success">Recovered</div>
+			<h2 class="card-title text-success"><span class="Count">{{ state_list.Total_Testing.total.recovered|default:0 }}</span></h2>
+			<h5 class="card-title text-success">+<span class="Count">{{ state_list.Total_Testing.delta.recovered|default:0 }}</span></h5>
 	</div>
-	<div class="col-sm-6 col-md-6 col-lg-3">
-		<div class="card card-4 border-light mb-3" style="max-width: 18rem;">
-			<div class="card-header" style="border-radius: 75px;">Deceased</div>
-				<div class="card-body">
-				<h2 class="card-title text-black-50 text-center"><span class="Count">{{ state_list.Total_Testing.total.deceased|default:0 }}</span></h2>
-				<h5 class="card-title text-black-50 text-center">+<span class="Count">{{ state_list.Total_Testing.delta.deceased|default:0 }}</span></h5>
-				<p class="card-text"></p>
-			</div>
-		</div>
+
+	<div class="border border-light flex-fill crd-clmn">
+		<div class="mt-2 mb-2 text-black-50">Deceased</div>
+			<h2 class="card-title text-black-50"><span class="Count">{{ state_list.Total_Testing.total.deceased|default:0 }}</span></h2>
+			<h5 class="card-title text-black-50">+<span class="Count">{{ state_list.Total_Testing.delta.deceased|default:0 }}</span></h5>
 	</div>
+	<!-- </div> -->
 </div>
