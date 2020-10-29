@@ -26,8 +26,8 @@
 .crd-clmn
 {
 	border: 1px solid;
-	border-radius: 20px; /* 20px */
-	margin: 0.30rem;
+	border-radius: 50px; /* 20px */
+	margin: 0.80rem;
 	padding: 0.30rem;
 	text-align: center;
 	/*width: inherit;
@@ -89,26 +89,26 @@ h5
 
 <div class="d-flex flex-row justify-content-around my-4">
 	<!-- <div class="crd flex-fill"> -->
-	<div class="border border-danger flex-fill crd-clmn ">
+	<div class="border border-danger flex-fill crd-clmn py-3 ">
 		<div class="mt-2 mb-2 text-danger">Confirmed</div>
 			<h2 class="card-title text-danger"><span class="Count">{{ state_list.Total_Testing.total.confirmed|default:0 }}</span></h2>
 			<h5 class="card-title text-danger">+<span class="Count">{{ state_list.Total_Testing.delta.confirmed|default:0 }}</span></h5>
 	</div>
 
-	<div class="border border-primary flex-fill crd-clmn ">
+	<div class="border border-primary flex-fill crd-clmn py-3 ">
 		<div class="mt-2 mb-2 text-primary">Active</div>
 			<i class="heart fa fa-heart"></i>
 			<h2 class="card-title text-primary"><span class="Count">{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered|sub:state_list.Total_Testing.total.deceased }}</span></h2>
 			<h5 class="card-title text-primary">+<span class="Count">{{ state_list.Total_Testing.delta.active|default:0 }}</span></h5>
 	</div>
 
-	<div class="border border-success flex-fill crd-clmn ">
+	<div class="border border-success flex-fill crd-clmn py-3 ">
 		<div class="mt-2 mb-2 text-success">Recovered</div>
 			<h2 class="card-title text-success"><span class="Count">{{ state_list.Total_Testing.total.recovered|default:0 }}</span></h2>
 			<h5 class="card-title text-success">+<span class="Count">{{ state_list.Total_Testing.delta.recovered|default:0 }}</span></h5>
 	</div>
 
-	<div class="border border-light flex-fill crd-clmn">
+	<div class="border border-light flex-fill crd-clmn py-3">
 		<div class="mt-2 mb-2 text-black-50">Deceased</div>
 			<h2 class="card-title text-black-50"><span class="Count">{{ state_list.Total_Testing.total.deceased|default:0 }}</span></h2>
 			<h5 class="card-title text-black-50">+<span class="Count">{{ state_list.Total_Testing.delta.deceased|default:0 }}</span></h5>
