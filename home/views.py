@@ -62,6 +62,8 @@ def home_view(request, *args, **kwargs):
 					for date, data in dt.items():
 						pass
 
+		active = confirmed[-1] - (recovered[-1] + deceased[-1] + other[-1])
+		print(confirmed[-1], active, recovered[-1], deceased[-1], tested[-1])
 		context = {
 			"state_list": state_list,
 			"confirmed": confirmed[-1],

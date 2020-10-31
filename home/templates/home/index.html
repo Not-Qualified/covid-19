@@ -24,7 +24,7 @@ td:hover
 	<div class="col-10 col-sm-10 col-md-8">
 		{% include "home/cards.html" %}
 		<div class="row justify-content-center">
-			<div class="col-sm-12 col-md-8">
+			<div class="col-sm-12 col-md-7">
 				<div class="table-responsive">
 					<table id="example" class="table table-sm table-hover table-striped" style="width:100%"><!-- table-sm table-striped table-borderless table-hover -->
 					        <thead class=""><!-- thead-dark -->
@@ -97,7 +97,7 @@ td:hover
 				</div>
 			</div>
 
-			<div class="col-sm-12 col-md-4">
+			<div class="col-sm-12 col-md-5">
 				{% include 'home/index-chart.html' %}
 			</div>
 		</div>
@@ -260,8 +260,35 @@ td:hover
 						title: {
 							display: true,
 							text: 'Total COVID Cases - Graph Representation'
+						},
+						scales: {
+					    xAxes: [{
+					      scaleLabel: {
+					        display: true,
+					        labelString: 'status',
+					        fontColor: "#4255f5",
+					        fontFamily: "",
+					        fontSize: 30,
+					        fontStyle: "bold",
+					        padding: 0,
+					        lineHeight: 0.5,
+					      }
+					  	}],
+						yAxes: [{
+						scaleLabel: {
+						display: true,
+						labelString: 'cases',
+						fontColor: "#4287f5",
+						fontFamily: "",
+						fontSize: 30,
+						fontStyle: "bold",
+						padding: 0,
+						lineHeight: 0.5,
 						}
+						}]
+					  },
 					},
 		});	
+
 	</script>
 {% endblock script %}
