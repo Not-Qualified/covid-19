@@ -7,17 +7,24 @@
 <style type="text/css">
 table tbody tr th a
 {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 td
 {
 	padding-right: 30px !important;
+	vertical-align: bottom !important;
+}
+th
+{
+	vertical-align: middle !important;
+	text-align: center !important;
 }
 td:hover
 {
   background-size:  100% 100%;
   transform:scale(1.4545,1.34);
-  transform-origin:center;
+  /*transform:scale(1.05,1.05);*/
+  transform-origin: center;
 }
 </style>
 <div class="row justify-content-center">
@@ -130,7 +137,10 @@ td:hover
 		});
 	</script>
 
-	<script type="text/javascript">
+	
+{% endblock script %}
+
+<script type="text/javascript">
 
 		var delta = document.getElementById("deltaChart").getContext('2d');
 		var total = document.getElementById("totalChart").getContext('2d');
@@ -291,4 +301,3 @@ td:hover
 		});	
 
 	</script>
-{% endblock script %}
