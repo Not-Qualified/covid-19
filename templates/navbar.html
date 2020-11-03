@@ -3,6 +3,7 @@
 {% url 'vaccine_update_view' as vaccine_update_view %}
 {% url 'hospital_register_view' as hospital_register_view %}
 {% url 'verified_hospital_view' as verified_hospital_view %}
+{% url 'testing_center_view' as testing_center_view %}
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +53,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ verified_hospital_view }}">COVID Hospital List</a>
             </li>
-            {% endif %}  
+            {% endif %} 
+
+            {% if request.path == testing_center_view %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ testing_center_view }}">COVID Testing Center</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ testing_center_view }}">COVID Testing Center</a>
+            </li>
+            {% endif %}
             
             <li class="nav-item mb-5">
                 <div id="google_translate_element"></div>

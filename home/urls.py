@@ -9,6 +9,7 @@ urlpatterns = [
     path("vaccine-update/", vaccine_update_view, name="vaccine_update_view"),
     path("hospital-register/", hospital_register_view, name="hospital_register_view"),
     path("verified-hospital/", verified_hospital_view, name="verified_hospital_view"),
+    path("testing-center/", TemplateView.as_view(template_name="home/testing-center.html"), name="testing_center_view"),
     path("privacy-policy/", TemplateView.as_view(template_name="privacy-policy.html"), name="privacy_policy_view"),
     path("contact-us/", TemplateView.as_view(template_name="contact-us.html"), name="contact_us_view"),
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),

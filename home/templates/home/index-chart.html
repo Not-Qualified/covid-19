@@ -5,13 +5,12 @@
 <div id="visualization-1"> </div>
 <hr />
 <h4>COVID-19 Government Approved Test Centers </h4>
+
 <!-- <iframe src="https://www.google.co.in/maps/d/embed?mid=1vC8f_Ui2dPdCIMEIi8ajNgVFdDO9RaVK" width="640" height="480"></iframe> -->
-<div class="embed-responsive embed-responsive-4by3">
+
+<!-- <div class="embed-responsive embed-responsive-4by3">
   <iframe src="https://www.google.co.in/maps/d/u/2/embed?mid=1tiS6MqaCuMXFyYNTWJGFw7Y_QSjIFAGg"></iframe>
-</div>
-<!-- <canvas id="totalChart" height="300"></canvas>
-<hr />
-<canvas id="deltaChart" height="300"></canvas> -->
+</div> -->
 
 <!-- Google Chart JS -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -28,7 +27,6 @@
 var dataArray = [['State','Confirmed', 'Deceased']];
         
     {% for state, data in state_list.items %}
-      // console.log("{{state}}");
       {% if not "Total_Testing" == state %}
       dataArray.push(["{{state}}",
         {{ data.total.confirmed }},
@@ -89,7 +87,6 @@ function drawVisualization() {
 
 var dataArray_second = [['State', 'Recovered']];
     {% for state, data in state_list.items %}
-      console.log("{{state}}")
       {% if not "Total_Testing" == state %}
       dataArray_second.push(["{{state}}",
         // {{ data.total.active }},
