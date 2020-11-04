@@ -1,3 +1,12 @@
+{% block head %}
+<style type="text/css">
+.bg-dark
+{
+    background-color: teal !important;
+}
+</style>
+{% endblock head %}
+
 {% load static %}
 {% url 'home_view' as home_view %}
 {% url 'vaccine_update_view' as vaccine_update_view %}
@@ -27,11 +36,11 @@
 
             {% if request.path == vaccine_update_view %}
             <li class="nav-item active">
-                <a class="nav-link" href="{{ vaccine_update_view }}">Vaccination Update</a>
+                <a class="nav-link" href="{{ vaccine_update_view }}">Vaccine Update</a>
             </li>
             {% else %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ vaccine_update_view }}">Vaccination Update</a>
+                <a class="nav-link" href="{{ vaccine_update_view }}">Vaccine Update</a>
             </li>
             {% endif %}
 
