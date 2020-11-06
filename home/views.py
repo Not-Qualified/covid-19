@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
 import requests
-import datetime
+from datetime import datetime
 from .states import states_dict
 from .models import HospitalRegister, VaccineUpdatePost
 from .forms import VaccineUpdateForm, HospitalRegisterForm
@@ -36,7 +36,7 @@ def home_view(request, *args, **kwargs):
 
 		blank, confirmed, active, recovered, deceased = [], [], [], [], []
 		for dates, states_data in new_chain.items():
-			blank.append(dates)
+			blank.append(datetime.strptime(dates, "%Y-%m-%d").strftime("%d-%b"))
 			for state_code, state_data in states_data.items():
 				if(state_code == "TT"):
 					confirmed.append(state_data.get("total").get("confirmed", 0))
