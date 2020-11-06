@@ -36,6 +36,7 @@ def home_view(request, *args, **kwargs):
 
 		blank, confirmed, active, recovered, deceased = [], [], [], [], []
 		for dates, states_data in new_chain.items():
+			blank.append(dates)
 			for state_code, state_data in states_data.items():
 				if(state_code == "TT"):
 					confirmed.append(state_data.get("total").get("confirmed", 0))
@@ -45,7 +46,7 @@ def home_view(request, *args, **kwargs):
 							state_data.get("total").get("deceased", 0)))
 					recovered.append(state_data.get("total").get("recovered", 0))
 					deceased.append(state_data.get("total").get("deceased", 0))
-					blank.append("")
+					# blank.append("")
 
 		context = {
 			"state_list": state_list,

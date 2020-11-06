@@ -31,6 +31,14 @@ var opt = {
         tooltips: {
             mode: 'index',
             intersect: false,
+            // backgroundColor: "red",
+            titleFontFamily: "",
+            bodyFontSize: 17,
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    return tooltipItem.yLabel.toLocaleString("en-IN");
+                }
+            },
         },
         hover: {
             mode: 'nearest',
@@ -76,76 +84,12 @@ var myChart = new Chart(ctx, {
             fillColor: "red",
             borderWidth: 5,
             backgroundColor: "red",
-            borderColor: "#ffcdd2",
+            borderColor: "#ef9a9a",
             fill: false,
         },]
     },
 
-    options: {
-        animation: {
-            duration: 3000,
-            numSteps: 300,
-            easing: "linear", // general animation time
-        },
-    //     tooltips: {
-    //     callbacks: {
-    //         label: function(tooltipItem, data) {
-    //             return "$" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
-    //                 return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-    //             });
-    //         }
-    //     }
-    // },
-        responsive: true,
-        title: {
-            // display: true,
-            // text: 'COVID - Chart'
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false,
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
-        },
-        scales: {
-            xAxes: [{
-                gridLines: {
-                    drawOnChartArea: false
-                },
-                display: true,
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Last - 8 Days Cummulative'
-                }
-            }],
-            yAxes: [{
-                gridLines: {
-                    drawOnChartArea: false
-                },
-                display: true,
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Cases'
-                },
-                ticks: {
-                    callback: function(label, index, labels) {
-                        // return label/1000+'k';
-                        // return label.toLocaleString('en-IN');
-                        return number_to_words(label);
-                    }
-                },
-            }]
-        }
-        // scales: {
-        //     yAxes: [{
-        //         ticks: {
-        //             beginAtZero: true
-        //         }
-        //     }]
-        // }
-    }
+    options: opt,
 });
 
 
@@ -161,57 +105,11 @@ var active = new Chart(active_ctx, {
             data: {{ active }},
             borderWidth: 5,
             backgroundColor: "blue",
-            borderColor: "#bbdefb",
+            borderColor: "#90caf9",
             fill: false,
         },]
     },
-    options: {
-        animation: {
-            duration: 3000,
-            numSteps: 300,
-            easing: "linear", // general animation time
-        },
-        responsive: true,
-        title: {
-            // display: true,
-            // text: 'COVID - Chart'
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false,
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
-        },
-        scales: {
-            xAxes: [{
-                gridLines: {
-                    drawOnChartArea: false
-                },
-                display: true,
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Last - 8 Days Cummulative'
-                }
-            }],
-            yAxes: [{
-                gridLines: {
-                    drawOnChartArea: false
-                },
-                display: true,
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Cases'
-                },
-                ticks: {
-                    callback: function(label, index, labels) {
-                        return number_to_words(label);
-                    }
-                },
-            }]
-        },
-    }
+    options: opt,
 });
 
 
@@ -220,11 +118,6 @@ var active = new Chart(active_ctx, {
 var recovered_ctx = document.getElementById('recovered-chart');
 var recovered = new Chart(recovered_ctx, {
     type: 'line',
-    scaleOverride : true,
-    scaleSteps : 5,
-    scaleStepWidth : 50,
-    scaleStartValue : 0, 
-    maxTicksLimit: 5,
     data: {
         labels: {{ blank|safe }},
         datasets: [{
@@ -232,59 +125,11 @@ var recovered = new Chart(recovered_ctx, {
             data: {{ recovered }},
             borderWidth: 5,
             backgroundColor: "green",
-            borderColor: "#c8e6c9",
+            borderColor: "#a5d6a7",
             fill: false,
         },]
     },
-    options: {
-        animation: {
-            duration: 3000,
-            numSteps: 300,
-            easing: "linear", // general animation time
-        },
-        responsive: true,
-        title: {
-            // display: true,
-            // text: 'COVID - Chart'
-        },
-        tooltips: {
-            mode: 'index',
-            intersect: false,
-        },
-        hover: {
-            mode: 'nearest',
-            intersect: true
-        },
-        scales: {
-            xAxes: [{
-                gridLines: {
-                    drawOnChartArea: false
-                },
-                display: true,
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Last - 8 Days Cummulative'
-                }
-            }],
-            yAxes: [{
-                gridLines: {
-                    drawOnChartArea: false
-                },
-                display: true,
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Cases'
-                },
-                ticks: {
-                    callback: function(label, index, labels) {
-                        return number_to_words(label);
-                    },
-                    maxTicksLimit: 7,
-                    suggestedMin: {{ recovered.0 }},
-                },
-            }]
-        },
-    }
+    options: opt,
 });
 
 
@@ -300,7 +145,7 @@ var deceased = new Chart(deceased_ctx, {
             data: {{ deceased }},
             borderWidth: 5,
             backgroundColor: "grey",
-            borderColor: "#e0e0e0",
+            borderColor: "#bdbdbd",
             fill: false,
         }]
     },
