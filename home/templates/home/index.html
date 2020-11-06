@@ -91,19 +91,19 @@ td:hover
 					        <tr>
 					        	<th><strong>Total</strong></th>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong><span class="text-danger">{{ state_list.Total_Testing.total.confirmed|intcomma_indian }}</span></strong>
+					        		<strong><span class="Count text-danger">{{ state_list.Total_Testing.total.confirmed }}</span></strong>
 					        	</td>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong><span class="text-primary">{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered|intcomma_indian }}</span></strong>
+					        		<strong><span class="Count text-primary">{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered }}</span></strong>
 					        	</td>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong><span class="text-success">{{ state_list.Total_Testing.total.recovered|intcomma_indian }}</span></strong>
+					        		<strong><span class="Count text-success">{{ state_list.Total_Testing.total.recovered }}</span></strong>
 					        	</td>
 					        	<td align="right" style="padding-right: 30px !important;">
-					        		<strong><span class="text-dark">{{ state_list.Total_Testing.total.deceased|intcomma_indian }}</span></strong>
+					        		<strong><span class="Count text-dark">{{ state_list.Total_Testing.total.deceased }}</span></strong>
 					        	</td>
 					        	<td align="right" class="tested-col" style="padding-right: 30px !important; width: 50px; ">
-					        		<strong><span class="text-warning">{{ state_list.Total_Testing.total.tested|intcomma_indian }}</span></strong>
+					        		<strong><span class="Count text-warning">{{ state_list.Total_Testing.total.tested }}</span></strong>
 					        	</td>
 					        	<td align="right" style="padding-right: 30px !important;">
 					        		<strong><span class="text-info">138 Crores</span></strong>
