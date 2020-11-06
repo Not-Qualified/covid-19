@@ -49,11 +49,11 @@ def home_view(request, *args, **kwargs):
 
 		context = {
 			"state_list": state_list,
-			"blank": blank[-8:],
-			"confirmed": confirmed[-8:],
-			"active": active[-8:],
-			"recovered": recovered[-8:],
-			"deceased": deceased[-8:],
+			"blank": blank[-30:],
+			"confirmed": confirmed[-30:],
+			"active": active[-30:],
+			"recovered": recovered[-30:],
+			"deceased": deceased[-30:],
 		}
 		return render(request, "home/index.html", context)
 
