@@ -28,39 +28,39 @@ def home_view(request, *args, **kwargs):
 			state_list[states_dict[k]] = v
 
 
-		confirmed, deceased, other, recovered, tested, DATES = [], [], [], [], [], []
-		for st, dates in timeseries.items():
-			if st == "TT":
-				for i, dt in dates.items():
-					for date, data in dt.items():
-						if "delta" in data:
-							DATES.append(str(date).format(datetime.datetime.now()))
-							if "confirmed" in data["delta"]:
-								confirmed.append(data["delta"]["confirmed"])
-							else:
-								confirmed.append(0)
-							if "deceased" in data["delta"]:
-								deceased.append(data["delta"]["deceased"])
-							else:
-								deceased.append(0)
-							if "other" in data["delta"]:
-								other.append(data["delta"]["other"])
-							else:
-								other.append(0)
-							if "recovered" in data["delta"]:
-								recovered.append(data["delta"]["recovered"])
-							else:
-								recovered.append(0)
-							if "tested" in data["delta"]:
-								tested.append(data["delta"]["tested"])
-							else:
-								tested.append(0)
-						if date == datetime.datetime.now().strftime("%Y-%m-%d"):
-							pass
-			else:
-				for i, dt in dates.items():
-					for date, data in dt.items():
-						pass
+		# confirmed, deceased, other, recovered, tested, DATES = [], [], [], [], [], []
+		# for st, dates in timeseries.items():
+		# 	if st == "TT":
+		# 		for i, dt in dates.items():
+		# 			for date, data in dt.items():
+		# 				if "delta" in data:
+		# 					DATES.append(str(date).format(datetime.datetime.now()))
+		# 					if "confirmed" in data["delta"]:
+		# 						confirmed.append(data["delta"]["confirmed"])
+		# 					else:
+		# 						confirmed.append(0)
+		# 					if "deceased" in data["delta"]:
+		# 						deceased.append(data["delta"]["deceased"])
+		# 					else:
+		# 						deceased.append(0)
+		# 					if "other" in data["delta"]:
+		# 						other.append(data["delta"]["other"])
+		# 					else:
+		# 						other.append(0)
+		# 					if "recovered" in data["delta"]:
+		# 						recovered.append(data["delta"]["recovered"])
+		# 					else:
+		# 						recovered.append(0)
+		# 					if "tested" in data["delta"]:
+		# 						tested.append(data["delta"]["tested"])
+		# 					else:
+		# 						tested.append(0)
+		# 				if date == datetime.datetime.now().strftime("%Y-%m-%d"):
+		# 					pass
+		# 	else:
+		# 		for i, dt in dates.items():
+		# 			for date, data in dt.items():
+		# 				pass
 
 		# active = confirmed[-1] - (recovered[-1] + deceased[-1] + other[-1])
 		# print(confirmed[-1], active, recovered[-1], deceased[-1], tested[-1])
@@ -68,15 +68,42 @@ def home_view(request, *args, **kwargs):
 		# for i in enumerate(state_list):
 		# 	print(i)
 
+
+
+		try:
+			new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
+		except:
+			return HttpResponse("<script>location.reload();</script>")
+
+		new_chain = new_chain.json()
+
+		blank, confirmed, active, recovered, deceased = [], [], [], [], []
+		for dates, states_data in new_chain.items():
+			for state_code, state_data in states_data.items():
+				if(state_code == "TT"):
+					confirmed.append(state_data.get("total").get("confirmed", 0))
+					active.append(
+						state_data.get("total").get("confirmed") - 
+						( state_data.get("total").get("recovered", 0) + 
+							state_data.get("total").get("deceased", 0)))
+					recovered.append(state_data.get("total").get("recovered", 0))
+					deceased.append(state_data.get("total").get("deceased", 0))
+					blank.append("")
+
 		context = {
 			"state_list": state_list,
-			"confirmed": confirmed[-1],
-			"deceased": deceased[-1],
-			"other": other[-1],
-			"recovered": recovered[-1],
-			"tested": tested[-1],
-			"dates": DATES,
-			"active": confirmed[-1] - (recovered[-1] + deceased[-1] + other[-1]),
+			# "confirmed": confirmed[-1],
+			# "deceased": deceased[-1],
+			# "other": other[-1],
+			# "recovered": recovered[-1],
+			# "tested": tested[-1],
+			# "dates": DATES,
+			# "active": confirmed[-1] - (recovered[-1] + deceased[-1] + other[-1]),
+			"blank": blank[-30:],
+			"confirmed": confirmed[-30:],
+			"active": active[-30:],
+			"recovered": recovered[-30:],
+			"deceased": deceased[-30:],
 		}
 		return render(request, "home/index.html", context)
 
@@ -137,3 +164,35 @@ def verified_hospital_view(request, *args, **kwagrs):
 		"object_list": HospitalRegister.objects.all()
 	}
 	return render(request, "home/verified_hospital.html", context)
+
+
+def chart_view(request, *args, **kwagrs):
+	if request.method == "GET":
+		try:
+			chain = requests.get("https://api.covid19india.org/v4/data-all.json")
+		except:
+			return HttpResponse("<script>location.reload();</script>")
+
+	chain = chain.json()
+
+	blank, confirmed, active, recovered, deceased = [], [], [], [], []
+	for dates, states_data in chain.items():
+		for state_code, state_data in states_data.items():
+			if(state_code == "TT"):
+				confirmed.append(state_data.get("total").get("confirmed", 0))
+				active.append(
+					state_data.get("total").get("confirmed") - 
+					( state_data.get("total").get("recovered", 0) + 
+						state_data.get("total").get("deceased", 0)))
+				recovered.append(state_data.get("total").get("recovered", 0))
+				deceased.append(state_data.get("total").get("deceased", 0))
+				blank.append("")
+
+	context = {
+		"blank": blank[-8:],
+		"confirmed": confirmed[-8:],
+		"active": active[-8:],
+		"recovered": recovered[-8:],
+		"deceased": deceased[-8:],
+	}
+	return render(request, "home/chart.html", context)

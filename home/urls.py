@@ -2,9 +2,10 @@ from django.urls import path
 from django.views.generic import TemplateView
 from .views import (home_view, 
 					district_view, vaccine_update_view, hospital_register_view, 
-					verified_hospital_view, )
+					verified_hospital_view, chart_view, )
 
 urlpatterns = [
+    path("chart/", chart_view, name="chart_view"),
     path("", home_view, name="home_view"),
     path("vaccine-update/", vaccine_update_view, name="vaccine_update_view"),
     path("hospital-register/", hospital_register_view, name="hospital_register_view"),

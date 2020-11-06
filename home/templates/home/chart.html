@@ -1,0 +1,336 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+
+<!-- <div class="row"> -->
+    <!-- <div class="col-12 col-md-3"> -->
+        <canvas class="sidebar-canvas-confirmed" width="350" height="300" id="confirmed-chart"></canvas>
+    <!-- </div> -->
+    <!-- <div class="col-12 col-md-3"> -->
+        <canvas class="sidebar-canvas-active" width="350" height="300" id="active-chart"></canvas>
+    <!-- </div> -->
+    <!-- <div class="col-12 col-md-3"> -->
+        <canvas class="sidebar-canvas-recovered" width="350" height="300" id="recovered-chart"></canvas>
+    <!-- </div> -->
+    <!-- <div class="col-12 col-md-3"> -->
+        <canvas class="sidebar-canvas-deceased" width="350" height="300" id="deceased-chart"></canvas>
+    <!-- </div> -->
+<!-- </div> -->
+
+<script>
+
+var opt = {
+        scaleLineColor: "red",
+        animation: {
+            duration: 3000,
+            numSteps: 300,
+            easing: "linear", // general animation time
+        },
+        responsive: true,
+        title: {
+            // display: true,
+            // text: 'COVID - Chart'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    drawOnChartArea: false,
+                    // color: "red",
+                    // display: false,
+                    // zeroLineColor: 'red',
+                    // lineWidth: 1,
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Last - 8 Days Cummulative'
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    // color: "blue",
+                    // zeroLineColor: 'blue',
+                    // display: false,
+                    drawOnChartArea: false,
+                    // lineWidth: 1,
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Cases'
+                },
+                ticks: {
+                    callback: function(label, index, labels) {
+                        return number_to_words(label);
+                    }
+                },
+            }]
+        }
+    }
+
+var ctx = document.getElementById('confirmed-chart');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ blank|safe }},
+        datasets: [{
+            label: 'Confirmed',
+            data: {{ confirmed }},
+            fillColor: "red",
+            borderWidth: 5,
+            backgroundColor: "red",
+            borderColor: "#ffcdd2",
+            fill: false,
+        },]
+    },
+
+    options: {
+        animation: {
+            duration: 3000,
+            numSteps: 300,
+            easing: "linear", // general animation time
+        },
+    //     tooltips: {
+    //     callbacks: {
+    //         label: function(tooltipItem, data) {
+    //             return "$" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+    //                 return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+    //             });
+    //         }
+    //     }
+    // },
+        responsive: true,
+        title: {
+            // display: true,
+            // text: 'COVID - Chart'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    drawOnChartArea: false
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Last - 8 Days Cummulative'
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    drawOnChartArea: false
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Cases'
+                },
+                ticks: {
+                    callback: function(label, index, labels) {
+                        // return label/1000+'k';
+                        // return label.toLocaleString('en-IN');
+                        return number_to_words(label);
+                    }
+                },
+            }]
+        }
+        // scales: {
+        //     yAxes: [{
+        //         ticks: {
+        //             beginAtZero: true
+        //         }
+        //     }]
+        // }
+    }
+});
+
+
+
+
+var active_ctx = document.getElementById('active-chart');
+var active = new Chart(active_ctx, {
+    type: 'line',
+    data: {
+        labels: {{ blank|safe }},
+        datasets: [{
+            label: 'Active',
+            data: {{ active }},
+            borderWidth: 5,
+            backgroundColor: "blue",
+            borderColor: "#bbdefb",
+            fill: false,
+        },]
+    },
+    options: {
+        animation: {
+            duration: 3000,
+            numSteps: 300,
+            easing: "linear", // general animation time
+        },
+        responsive: true,
+        title: {
+            // display: true,
+            // text: 'COVID - Chart'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    drawOnChartArea: false
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Last - 8 Days Cummulative'
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    drawOnChartArea: false
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Cases'
+                },
+                ticks: {
+                    callback: function(label, index, labels) {
+                        return number_to_words(label);
+                    }
+                },
+            }]
+        },
+    }
+});
+
+
+
+
+var recovered_ctx = document.getElementById('recovered-chart');
+var recovered = new Chart(recovered_ctx, {
+    type: 'line',
+    scaleOverride : true,
+    scaleSteps : 5,
+    scaleStepWidth : 50,
+    scaleStartValue : 0, 
+    maxTicksLimit: 5,
+    data: {
+        labels: {{ blank|safe }},
+        datasets: [{
+            label: 'Recovered',
+            data: {{ recovered }},
+            borderWidth: 5,
+            backgroundColor: "green",
+            borderColor: "#c8e6c9",
+            fill: false,
+        },]
+    },
+    options: {
+        animation: {
+            duration: 3000,
+            numSteps: 300,
+            easing: "linear", // general animation time
+        },
+        responsive: true,
+        title: {
+            // display: true,
+            // text: 'COVID - Chart'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    drawOnChartArea: false
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Last - 8 Days Cummulative'
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    drawOnChartArea: false
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Cases'
+                },
+                ticks: {
+                    callback: function(label, index, labels) {
+                        return number_to_words(label);
+                    },
+                    maxTicksLimit: 7,
+                    suggestedMin: {{ recovered.0 }},
+                },
+            }]
+        },
+    }
+});
+
+
+
+
+var deceased_ctx = document.getElementById('deceased-chart');
+var deceased = new Chart(deceased_ctx, {
+    type: 'line',
+    data: {
+        labels: {{ blank|safe }},
+        datasets: [{
+            label: 'Deceased',
+            data: {{ deceased }},
+            borderWidth: 5,
+            backgroundColor: "grey",
+            borderColor: "#e0e0e0",
+            fill: false,
+        }]
+    },
+    options: opt,
+});
+
+
+
+
+
+
+function number_to_words(label) {
+    var val = Math.abs(label)
+    if (val >= 10000000) {
+       val = (val / 10000000).toFixed(0) + ' Cr';
+    } else if (val >= 100000) {
+       val = (val / 100000).toFixed(1) + ' L';
+    } else if (val >= 1000) {
+        val = (val / 1000).toFixed(0) + ' K';
+    }
+    return val;
+}
+
+</script>
