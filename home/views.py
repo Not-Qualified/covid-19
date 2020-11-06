@@ -27,49 +27,6 @@ def home_view(request, *args, **kwargs):
 			v["code"] = k
 			state_list[states_dict[k]] = v
 
-
-		# confirmed, deceased, other, recovered, tested, DATES = [], [], [], [], [], []
-		# for st, dates in timeseries.items():
-		# 	if st == "TT":
-		# 		for i, dt in dates.items():
-		# 			for date, data in dt.items():
-		# 				if "delta" in data:
-		# 					DATES.append(str(date).format(datetime.datetime.now()))
-		# 					if "confirmed" in data["delta"]:
-		# 						confirmed.append(data["delta"]["confirmed"])
-		# 					else:
-		# 						confirmed.append(0)
-		# 					if "deceased" in data["delta"]:
-		# 						deceased.append(data["delta"]["deceased"])
-		# 					else:
-		# 						deceased.append(0)
-		# 					if "other" in data["delta"]:
-		# 						other.append(data["delta"]["other"])
-		# 					else:
-		# 						other.append(0)
-		# 					if "recovered" in data["delta"]:
-		# 						recovered.append(data["delta"]["recovered"])
-		# 					else:
-		# 						recovered.append(0)
-		# 					if "tested" in data["delta"]:
-		# 						tested.append(data["delta"]["tested"])
-		# 					else:
-		# 						tested.append(0)
-		# 				if date == datetime.datetime.now().strftime("%Y-%m-%d"):
-		# 					pass
-		# 	else:
-		# 		for i, dt in dates.items():
-		# 			for date, data in dt.items():
-		# 				pass
-
-		# active = confirmed[-1] - (recovered[-1] + deceased[-1] + other[-1])
-		# print(confirmed[-1], active, recovered[-1], deceased[-1], tested[-1])
-
-		# for i in enumerate(state_list):
-		# 	print(i)
-
-
-
 		try:
 			new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
 		except:
@@ -92,18 +49,11 @@ def home_view(request, *args, **kwargs):
 
 		context = {
 			"state_list": state_list,
-			# "confirmed": confirmed[-1],
-			# "deceased": deceased[-1],
-			# "other": other[-1],
-			# "recovered": recovered[-1],
-			# "tested": tested[-1],
-			# "dates": DATES,
-			# "active": confirmed[-1] - (recovered[-1] + deceased[-1] + other[-1]),
-			"blank": blank[-30:],
-			"confirmed": confirmed[-30:],
-			"active": active[-30:],
-			"recovered": recovered[-30:],
-			"deceased": deceased[-30:],
+			"blank": blank[-8:],
+			"confirmed": confirmed[-8:],
+			"active": active[-8:],
+			"recovered": recovered[-8:],
+			"deceased": deceased[-8:],
 		}
 		return render(request, "home/index.html", context)
 
