@@ -46,7 +46,6 @@ def home_view(request, *args, **kwargs):
 							state_data.get("total").get("deceased", 0)))
 					recovered.append(state_data.get("total").get("recovered", 0))
 					deceased.append(state_data.get("total").get("deceased", 0))
-					# blank.append("")
 
 		context = {
 			"state_list": state_list,
@@ -76,9 +75,37 @@ def district_view(request, state=None, *args, **kwargs):
 
 	state_detail = chain[state]
 
+
+	try:
+		new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
+	except:
+		return HttpResponse("<script>location.reload();</script>")
+
+	new_chain = new_chain.json()
+
+	blank, confirmed, active, recovered, deceased = [], [], [], [], []
+	for dates, states_data in new_chain.items():
+		blank.append(datetime.strptime(dates, "%Y-%m-%d").strftime("%d-%b"))
+		for state_code, state_data in states_data.items():
+			if(state_code == state):
+				confirmed.append(state_data.get("total").get("confirmed", 0))
+				active.append(
+					state_data.get("total").get("confirmed") - 
+					( state_data.get("total").get("recovered", 0) + 
+						state_data.get("total").get("deceased", 0)))
+				recovered.append(state_data.get("total").get("recovered", 0))
+				deceased.append(state_data.get("total").get("deceased", 0))
+
+
+
 	context = {
 		"state_detail": state_detail,
 		"both": both,
+		"blank": blank[-30:],
+		"confirmed": confirmed[-30:],
+		"active": active[-30:],
+		"recovered": recovered[-30:],
+		"deceased": deceased[-30:],
 	}
 
 	return render(request, "home/district.html", context)
