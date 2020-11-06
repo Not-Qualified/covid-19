@@ -1,6 +1,6 @@
 from django import forms
 from .models import (VaccineUpdate, 
-					HospitalRegister, )
+					HospitalRegister, ContactUsList, )
 
 # Registering Forms
 
@@ -48,6 +48,28 @@ STATE_CHOICES = [
 ]
 
 FACILITY_CHOICES = [("YES", "Yes"), ("NO", "No"), ]
+
+class ContactUsListForm(forms.ModelForm):
+	name = forms.CharField(max_length=100, 
+							widget=forms.TextInput(attrs={"class": "form-control"}))
+	mobile_number = forms.CharField(
+							required=False,
+							widget=forms.NumberInput(attrs={"class": "form-control", 
+															"max": 9999999999, 
+															"onKeyPress": "if(this.value.length==10) return false;"}))
+	message = forms.CharField(max_length=500, 
+							widget=forms.Textarea(
+								attrs={"class": "md-textarea form-control", 
+										"rows": "3"}, ), )
+
+	class Meta:
+		model = ContactUsList
+		fields = [
+			"name",
+			"mobile_number",
+			"message",
+		]
+
 
 class VaccineUpdateForm(forms.ModelForm):
 	name = forms.CharField(max_length=150, 

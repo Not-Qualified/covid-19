@@ -7,7 +7,17 @@
 			<div class="container">
 				<h1 class="display-4">Contact Us</h1>
 				<p class="lead">Contact Us via Email at info@thepenguina.com - 
-					<a href="https://thepenguina.com/" target="_blank">thepenguina.com</p>
+					<a href="https://thepenguina.com/" target="_blank">thepenguina.com</a>
+				</p>
+				<div class="row">
+					<div class="col">
+						<form method="POST" action=".">
+							{% csrf_token %}
+							{{ form }}
+							<button class="btn btn-primary" type="submit">Submit</button>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

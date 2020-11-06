@@ -6,7 +6,7 @@ import requests
 from datetime import datetime
 from .states import states_dict
 from .models import HospitalRegister, VaccineUpdatePost
-from .forms import VaccineUpdateForm, HospitalRegisterForm
+from .forms import VaccineUpdateForm, HospitalRegisterForm, ContactUsListForm
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -163,3 +163,18 @@ def chart_view(request, *args, **kwagrs):
 		"deceased": deceased[-8:],
 	}
 	return render(request, "home/chart.html", context)
+
+
+def contact_us_view(request, *args, **kwargs):
+	form = ContactUsListForm(request.POST or None)
+
+	if request.method == "POST":
+		if form.is_valid():
+			form.save()
+			messages.success(request, "Your Response has Successfully Submitted")
+			form = ContactUsListForm()
+
+	context = {
+		"form": form,
+	}
+	return render(request, "contact-us.html", context)

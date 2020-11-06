@@ -94,6 +94,16 @@ class HospitalRegister(models.Model):
 					{self.hospital_contact_number} - {self.hospital_email}"""
 
 
+class ContactUsList(models.Model):
+	name = models.CharField(max_length=100, )
+	mobile_number = models.CharField(max_length=10, null=True, blank=True, validators=[mobile_regex, ])
+	message = models.TextField(max_length=5000, )
+
+	def __str__(self):
+		return f"{self.name} - {self.mobile_number}"
+
+
+
 class HitCounter(models.Model):
 	hit_count = models.BigIntegerField(default=0, )
 
