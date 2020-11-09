@@ -44,6 +44,9 @@ def home_view(request, *args, **kwargs):
 							state_data.get("total").get("deceased", 0)))
 					recovered.append(state_data.get("total").get("recovered", 0))
 					deceased.append(state_data.get("total").get("deceased", 0))
+				# else:
+				# 	if(dates == datetime.today().strftime("%Y-%m-%d")):
+				# 		state_list[state_code] = states_data
 
 		context = {
 			"state_list": state_list,
