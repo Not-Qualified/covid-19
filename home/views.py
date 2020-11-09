@@ -11,19 +11,7 @@ from .forms import VaccineUpdateForm, HospitalRegisterForm, ContactUsListForm
 # Create your views here.
 def home_view(request, *args, **kwargs):
 	if request.method == "GET":
-
-		# try:
-		# 	chain = requests.get("https://api.covid19india.org/v4/data.json")
-		# except:
-		# 	return HttpResponse("<script>location.reload();</script>")
-
-		# # extracting data in json format 
-		# chain = chain.json()
-
 		state_list = {}
-		# for k, v in chain.items():
-		# 	v["code"] = k
-		# 	# state_list[states_dict[k]] = v
 
 		try:
 			new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
@@ -36,6 +24,7 @@ def home_view(request, *args, **kwargs):
 		for dates, states_data in new_chain.items():
 			blank.append(datetime.strptime(dates, "%Y-%m-%d").strftime("%d-%b"))
 			for state_code, state_data in states_data.items():
+				state_data["code"] = state_code
 				if(state_code == "TT"):
 					confirmed.append(state_data.get("total").get("confirmed", 0))
 					active.append(
