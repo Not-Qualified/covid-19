@@ -76,7 +76,7 @@ def district_view(request, state=None, *args, **kwargs):
 			if(state_code == state):
 				confirmed.append(state_data.get("total").get("confirmed", 0))
 				active.append(
-					state_data.get("total").get("confirmed") - 
+					state_data.get("total").get("confirmed", 0) - 
 					( state_data.get("total").get("recovered", 0) + 
 						state_data.get("total").get("deceased", 0)))
 				recovered.append(state_data.get("total").get("recovered", 0))
