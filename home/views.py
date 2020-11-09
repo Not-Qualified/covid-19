@@ -12,18 +12,18 @@ from .forms import VaccineUpdateForm, HospitalRegisterForm, ContactUsListForm
 def home_view(request, *args, **kwargs):
 	if request.method == "GET":
 
-		try:
-			chain = requests.get("https://api.covid19india.org/v4/data.json")
-		except:
-			return HttpResponse("<script>location.reload();</script>")
+		# try:
+		# 	chain = requests.get("https://api.covid19india.org/v4/data.json")
+		# except:
+		# 	return HttpResponse("<script>location.reload();</script>")
 
-		# extracting data in json format 
-		chain = chain.json()
+		# # extracting data in json format 
+		# chain = chain.json()
 
 		state_list = {}
-		for k, v in chain.items():
-			v["code"] = k
-			state_list[states_dict[k]] = v
+		# for k, v in chain.items():
+		# 	v["code"] = k
+		# 	# state_list[states_dict[k]] = v
 
 		try:
 			new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
@@ -39,14 +39,16 @@ def home_view(request, *args, **kwargs):
 				if(state_code == "TT"):
 					confirmed.append(state_data.get("total").get("confirmed", 0))
 					active.append(
-						state_data.get("total").get("confirmed") - 
+						state_data.get("total").get("confirmed", 0) - 
 						( state_data.get("total").get("recovered", 0) + 
 							state_data.get("total").get("deceased", 0)))
 					recovered.append(state_data.get("total").get("recovered", 0))
 					deceased.append(state_data.get("total").get("deceased", 0))
-				# else:
-				# 	if(dates == datetime.today().strftime("%Y-%m-%d")):
-				# 		state_list[state_code] = states_data
+					if(dates == datetime.today().strftime("%Y-%m-%d")):
+						state_list[states_dict[state_code]] = state_data
+				else:
+					if(dates == datetime.today().strftime("%Y-%m-%d")):
+						state_list[states_dict[state_code]] = state_data
 
 		context = {
 			"state_list": state_list,
