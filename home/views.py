@@ -14,13 +14,11 @@ def home_view(request, *args, **kwargs):
 
 		try:
 			chain = requests.get("https://api.covid19india.org/v4/data.json")
-			timeseries = requests.get("https://api.covid19india.org/v4/timeseries.json")
 		except:
 			return HttpResponse("<script>location.reload();</script>")
 
 		# extracting data in json format 
 		chain = chain.json()
-		timeseries = timeseries.json()
 
 		state_list = {}
 		for k, v in chain.items():
@@ -89,7 +87,7 @@ def district_view(request, state=None, *args, **kwargs):
 					for district, data in state_data["districts"].items():
 						district_data[district] = data["total"]
 
-
+	state = states_dict.get(state, "")
 	context = {
 		"state": state,
 		"both": district_data,

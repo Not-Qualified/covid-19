@@ -2,39 +2,11 @@
 {% load static %}
 {% load mathfilters %}
 {% load indian_numbers_tags %}
+{% load keyvalue %}
 
 {% block content %}
 <style type="text/css">
-table tbody tr th a
-{
-	text-decoration: underline;
-}
-td
-{
-	padding-right: 30px !important;
-	vertical-align: bottom !important;
-}
-th
-{
-	vertical-align: middle !important;
-	/*text-align: center !important;*/
-}
-td:hover
-{
-  background-size:  100% 100%;
-  transform:scale(1.4545,1.34);
-  /*transform:scale(1.05,1.05);*/
-  transform-origin: center;
-}
-/*table
-{
-	table-layout:fixed;
-	width: 98% !important; 
-}
-.tested-col
-{
-	width: 50px;
-}*/
+
 </style>
 <div class="row justify-content-center">
 	<div class="col-10 col-sm-10 col-md-8">
@@ -42,16 +14,16 @@ td:hover
 		<div class="row justify-content-center">
 			<div class="col-sm-12 col-md-7">
 				<div class="table-responsive">
-					<table id="example" class="table table-sm table-hover table-striped" style="width:100%"><!-- table-sm table-striped table-borderless table-hover -->
-					        <thead class="" style="background: teal; color: white;"><!-- thead-dark -->
-					            <tr style="/*text-align: center;*/">
-					                <th scope="col">State Name</th>
-					                <th scope="col">Confirmed</th>
-					                <th scope="col">Active</th>
-					                <th scope="col">Recovered</th>
-					                <th scope="col">Deceased</th>
-					                <th scope="col" class="tested-col">Tested</th>
-					                <th scope="col">Population</th>
+					<table id="example" class="table table-sm table-hover table-striped" style="width:100%">
+					        <thead>
+					            <tr>
+					                <th class="th-header-state">State Name</th>
+					                <th class="th-header">Confirmed</th>
+					                <th class="th-header">Active</th>
+					                <th class="th-header">Recovered</th>
+					                <th class="th-header">Deceased</th>
+					                <th class="th-header tested-col">Tested</th>
+					                <th class="th-header">Population</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -62,50 +34,48 @@ td:hover
 						        			<a href="/{{ data.code }}/">{{ state }}</a>
 						        		</th>
 						        		
-						        		<td align="right" data-order="{{ data.total.confirmed|default:0 }}">
+						        		<td data-order="{{ data.total.confirmed|default:0 }}">
 						        			<strong><i class="fas fa-arrow-up text-danger"></i><span class="Count text-danger">{{ data.delta.confirmed }}</span></strong>
 						        			<br />
 						        			<span class="Count">{{ data.total.confirmed|default:0 }}</span>
 						        		</td>
-						        		<td align="right" data-order="{{ data.total.confirmed|sub:data.total.recovered }}">
-						        			<!-- <strong><span class="Count text-primary">{{ data.total.confirmed|sub:data.total.recovered }}</span></strong> -->
-						        			<!-- <br /> -->
+						        		<td data-order="{{ data.total.confirmed|sub:data.total.recovered }}">
 						        			<span class="Count">{{ data.total.confirmed|sub:data.total.recovered }}</span>
 						        		</td>
-						        		<td align="right" data-order="{{ data.total.recovered|default:0 }}">
+						        		<td data-order="{{ data.total.recovered|default:0 }}">
 						        			<strong><i class="fas fa-arrow-up text-success"></i><span class="Count text-success">{{ data.delta.recovered|default:0 }}</span></strong>
 						        			<br />
 						        			<span class="Count">{{ data.total.recovered|default:0 }}</span>
 						        		</td>
-						        		<td align="right" data-order="{{ data.total.deceased|default:0 }}">
+						        		<td data-order="{{ data.total.deceased|default:0 }}">
 						        			<strong><i class="fas fa-arrow-up text-black-50"></i><span class="Count text-black-50">{{ data.delta.deceased|default:0 }}</span></strong>
 						        			<br />
 						        			<span class="Count">{{ data.total.deceased|default:0 }}</span>
 						        		</td>
-						        		<td align="right" data-order="{{ data.total.tested|default:0 }}" class="tested-col">{{ data.total.tested|floatword_indian|default:0 }}</td>
-						        		<td align="right" data-order="{{ data.meta.population|default:0 }}">{{ data.meta.population|floatword_indian|default:0 }}</td>
+						        		<td data-order="{{ data.total.tested|default:0 }}" class="tested-col">{{ data.total.tested|floatword_indian|get_shortcut|default:0 }}</td>
+						        		<td data-order="{{ data.meta.population|default:0 }}">{{ data.meta.population|floatword_indian|default:0 }}</td>
 						        	</tr>
 					        	{% endif %}
 					        	{% endfor %}
 					        </tbody>
 					        <tr>
 					        	<th><strong>Total</strong></th>
-					        	<td align="right" style="padding-right: 30px !important;">
+					        	<td>
 					        		<strong><span class="Count text-danger">{{ state_list.Total_Testing.total.confirmed }}</span></strong>
 					        	</td>
-					        	<td align="right" style="padding-right: 30px !important;">
+					        	<td>
 					        		<strong><span class="Count text-primary">{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered }}</span></strong>
 					        	</td>
-					        	<td align="right" style="padding-right: 30px !important;">
+					        	<td>
 					        		<strong><span class="Count text-success">{{ state_list.Total_Testing.total.recovered }}</span></strong>
 					        	</td>
-					        	<td align="right" style="padding-right: 30px !important;">
+					        	<td>
 					        		<strong><span class="Count text-dark">{{ state_list.Total_Testing.total.deceased }}</span></strong>
 					        	</td>
-					        	<td align="right" class="tested-col" style="padding-right: 30px !important; width: 50px; ">
-					        		<strong><span class="Count text-warning">{{ state_list.Total_Testing.total.tested }}</span></strong>
+					        	<td class="tested-col">
+					        		<strong><span class="text-warning">{{ state_list.Total_Testing.total.tested|floatword_indian|default:0 }}</span></strong>
 					        	</td>
-					        	<td align="right" style="padding-right: 30px !important;">
+					        	<td>
 					        		<strong><span class="text-info">138 Crores</span></strong>
 					        	</td>
 					        </tr>

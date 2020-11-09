@@ -21,3 +21,14 @@ def get_active(dict):
 		return dict["confirmed"] - (dict["recovered"] + dict["deceased"])
 	else:
 		return None
+
+@register.filter
+def get_shortcut(value):
+	if("Lakhs" in value):
+		return value.replace(" Lakhs", "L")
+	elif("Crores" in value):
+		return value.replace(" Crores", "Cr")
+	elif("Thousands" in value):
+		return value.replace(" Thousands", "K")
+	else:
+		return value
