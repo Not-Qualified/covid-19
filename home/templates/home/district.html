@@ -11,8 +11,11 @@ canvas
 </style>
 <div class="container">
 	<h3>{{ state }}</h3>
-	<!-- <br />
-	<strong>{{ confirmed}}</strong> -->
+	<br />
+	Confirmed : <strong class="Count text-danger">{{ confirmed|last }}</strong><br />
+	Active : <strong class="Count text-primary">{{ active|last }}</strong><br />
+	Recovered : <strong class="Count text-success">{{ recovered|last }}</strong><br />
+	Deceased : <strong class="Count text-black-50">{{ deceased|last }}</strong>
 	<hr />
 	<div class="d-flex flex-column flex-sm-column flex-md-row mb-5" style="justify-content: space-evenly;">
 		{% include "home/chart.html" %}
