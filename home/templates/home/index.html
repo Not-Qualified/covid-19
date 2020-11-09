@@ -67,23 +67,23 @@ td:hover
 						        			<br />
 						        			<span class="Count">{{ data.total.confirmed|default:0 }}</span>
 						        		</td>
-						        		<td align="right">
+						        		<td align="right" data-order="{{ data.total.confirmed|sub:data.total.recovered }}">
 						        			<!-- <strong><span class="Count text-primary">{{ data.total.confirmed|sub:data.total.recovered }}</span></strong> -->
 						        			<!-- <br /> -->
 						        			<span class="Count">{{ data.total.confirmed|sub:data.total.recovered }}</span>
 						        		</td>
-						        		<td align="right">
+						        		<td align="right" data-order="{{ data.total.recovered|default:0 }}">
 						        			<strong><i class="fas fa-arrow-up text-success"></i><span class="Count text-success">{{ data.delta.recovered|default:0 }}</span></strong>
 						        			<br />
 						        			<span class="Count">{{ data.total.recovered|default:0 }}</span>
 						        		</td>
-						        		<td align="right">
+						        		<td align="right" data-order="{{ data.total.deceased|default:0 }}">
 						        			<strong><i class="fas fa-arrow-up text-black-50"></i><span class="Count text-black-50">{{ data.delta.deceased|default:0 }}</span></strong>
 						        			<br />
 						        			<span class="Count">{{ data.total.deceased|default:0 }}</span>
 						        		</td>
-						        		<td align="right" class="tested-col">{{ data.total.tested|floatword_indian|default:0 }}</td>
-						        		<td align="right">{{ data.meta.population|floatword_indian|default:0 }}</td>
+						        		<td align="right" data-order="{{ data.total.tested|default:0 }}" class="tested-col">{{ data.total.tested|floatword_indian|default:0 }}</td>
+						        		<td align="right" data-order="{{ data.meta.population|default:0 }}">{{ data.meta.population|floatword_indian|default:0 }}</td>
 						        	</tr>
 					        	{% endif %}
 					        	{% endfor %}
