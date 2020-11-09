@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 from .states import states_dict
 from .models import HospitalRegister, VaccineUpdatePost
 from .forms import VaccineUpdateForm, HospitalRegisterForm, ContactUsListForm
@@ -83,6 +83,9 @@ def district_view(request, state=None, *args, **kwargs):
 				deceased.append(state_data.get("total").get("deceased", 0))
 
 				if(dates == datetime.today().strftime("%Y-%m-%d")):
+					for district, data in state_data["districts"].items():
+						district_data[district] = data["total"]
+				elif(dates == (datetime.today()-timedelta(days=1)).strftime("%Y-%m-%d")):
 					for district, data in state_data["districts"].items():
 						district_data[district] = data["total"]
 
