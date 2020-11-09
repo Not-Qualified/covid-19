@@ -13,9 +13,8 @@
 	<div class="flex-fill crd-clmn py-3 child-card"> <!-- border border-primary -->
 		<div class="mt-2 mb-2 text-primary">Active</div>
 			<!-- <i class="heart fa fa-heart"></i> -->
-			<!-- <h2 class="card-title text-primary"><span class="Count">{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered|sub:state_list.Total_Testing.total.deceased }}</span></h2> -->
 			<h2 class="card-title text-primary"><span class="Count">{{ state_list.Total_Testing.total|get_active }}</span></h2>
-			<h5 class="card-title text-primary">+<span class="Count">{{ state_list.Total_Testing.delta.active|default:0 }}</span></h5>
+			<h5 class="card-title text-primary">+<span class="Count">{{ state_list.Total_Testing.delta|get_active }}</span></h5>
       <i class="heart fa fa-heart"></i>
 	</div>
 
