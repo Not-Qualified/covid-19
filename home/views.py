@@ -38,6 +38,8 @@ def home_view(request, *args, **kwargs):
 				else:
 					if(dates == datetime.today().strftime("%Y-%m-%d")):
 						state_list[states_dict[state_code]] = state_data
+					elif(dates == (datetime.today()-timedelta(days=1)).strftime("%Y-%m-%d")):
+						state_list[states_dict[state_code]] = state_data
 
 		context = {
 			"state_list": state_list,
