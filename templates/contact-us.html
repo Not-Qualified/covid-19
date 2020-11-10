@@ -13,7 +13,29 @@
 					<div class="col">
 						<form method="POST" action=".">
 							{% csrf_token %}
-							{{ form }}
+							<div class="col-sm col-md-6">
+								<div class="md-form mb-5">
+									{{ form.name }}
+									{{ form.name.label_tag|cut:":" }}
+									<span class="text-danger">{{ form.name.errors }}</span>
+								</div>
+							</div>
+
+							<div class="col-sm col-md-6">
+								<div class="md-form mb-5">
+								{{ form.mobile_number }}
+								{{ form.mobile_number.label_tag|cut:":" }}
+								<span class="text-danger">{{ form.mobile_number.errors }}</span>
+								</div>
+							</div>
+
+							<div class="col-sm col-md-6">
+								<div class="md-form mb-5">
+								{{ form.message }}
+								{{ form.message.label_tag|cut:":" }}
+								<span class="text-danger">{{ form.message.errors }}</span>
+								</div>
+							</div>
 							<button class="btn btn-primary" type="submit">Submit</button>
 						</form>
 					</div>
