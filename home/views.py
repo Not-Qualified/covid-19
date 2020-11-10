@@ -55,7 +55,8 @@ def home_view(request, *args, **kwargs):
 
 
 def district_view(request, state=None, *args, **kwargs):
-
+	state_list = {}
+	state_list["Total_Testing"] = {}
 	try:
 		new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
 	except:
@@ -70,6 +71,9 @@ def district_view(request, state=None, *args, **kwargs):
 		blank.append(datetime.strptime(dates, "%Y-%m-%d").strftime("%d-%b"))
 		for state_code, state_data in states_data.items():
 			if(state_code == state):
+				state_list["Total_Testing"]["total"] = state_data.get("total")
+				# state_list["Total_Testing"]["delta"] = state_data.get("delta")
+
 				confirmed.append(state_data.get("total").get("confirmed", 0))
 				active.append(
 					state_data.get("total").get("confirmed", 0) - 
@@ -85,10 +89,12 @@ def district_view(request, state=None, *args, **kwargs):
 					for district, data in state_data["districts"].items():
 						district_data[district] = data["total"]
 
+
 	state = states_dict.get(state, "")
 	context = {
 		"state": state,
 		"both": district_data,
+		"state_list": state_list,
 		"blank": blank[-30:],
 		"confirmed": confirmed[-30:],
 		"active": active[-30:],

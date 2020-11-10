@@ -10,13 +10,35 @@ canvas
 }
 </style>
 <div class="container">
+
 	<h3>{{ state }}</h3>
-	<br />
-	Confirmed : <strong class="Count text-danger">{{ confirmed|last }}</strong><br />
-	Active : <strong class="Count text-primary">{{ active|last }}</strong><br />
-	Recovered : <strong class="Count text-success">{{ recovered|last }}</strong><br />
-	Deceased : <strong class="Count text-black-50">{{ deceased|last }}</strong>
 	<hr />
+
+	<div class="d-flex flex-row justify-content-around my-4">
+		<div class="flex-fill crd-clmn py-3 child-card">
+			<div class="mt-2 mb-2 text-danger">Confirmed</div>
+				<h2 class="card-title text-danger"><span class="Count">{{ confirmed|last }}</span></h2>
+		</div>
+
+		<div class="flex-fill crd-clmn py-3 child-card">
+			<div class="mt-2 mb-2 text-primary">Active</div>
+				<!-- <i class="heart fa fa-heart"></i> -->
+				<h2 class="card-title text-primary"><span class="Count">{{ active|last }}</span></h2>
+	      <i class="heart fa fa-heart"></i>
+		</div>
+
+		<div class="flex-fill crd-clmn py-3 child-card">
+			<div class="mt-2 mb-2 text-success">Recovered</div>
+				<h2 class="card-title text-success"><span class="Count">{{ recovered|last }}</span></h2>
+		</div>
+
+		<div class="flex-fill crd-clmn py-3 child-card">
+			<div class="mt-2 mb-2 text-black-50">Deceased</div>
+				<h2 class="card-title text-black-50"><span class="Count">{{ deceased|last }}</span></h2>
+		</div>
+	</div>
+
+
 	<div class="d-flex flex-column flex-sm-column flex-md-row mb-5" style="justify-content: space-evenly;">
 		{% include "home/chart.html" %}
 	</div>
