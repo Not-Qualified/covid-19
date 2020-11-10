@@ -17,6 +17,8 @@ def get_active(dict):
 		dict["recovered"] = 0
 	if not "deceased" in dict:
 		dict["deceased"] = 0
+	if not "other" in dict:
+		dict["other"] = 0
 	if "confirmed" in dict and "recovered" in dict and "deceased" in dict and "other" in dict:
 		return dict["confirmed"] - (dict["recovered"] + dict["deceased"] + dict["other"])
 	if "confirmed" in dict and "recovered" in dict and "deceased" in dict:

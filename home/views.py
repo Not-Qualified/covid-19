@@ -35,12 +35,15 @@ def home_view(request, *args, **kwargs):
 					deceased.append(state_data.get("total").get("deceased", 0))
 					if(dates == datetime.today().strftime("%Y-%m-%d")):
 						state_list[states_dict[state_code]] = state_data
+					elif(dates == (datetime.today()-timedelta(days=1)).strftime("%Y-%m-%d")):
+						state_list[states_dict[state_code]] = state_data
 				else:
 					if(dates == datetime.today().strftime("%Y-%m-%d")):
 						state_list[states_dict[state_code]] = state_data
 					elif(dates == (datetime.today()-timedelta(days=1)).strftime("%Y-%m-%d")):
 						state_list[states_dict[state_code]] = state_data
 
+		print(state_list)
 		context = {
 			"state_list": state_list,
 			"blank": blank[-30:],
