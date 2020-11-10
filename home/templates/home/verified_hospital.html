@@ -11,6 +11,12 @@ td
 </style>
 <div class="row justify-content-center">
 	<div class="col-10 col-sm-10 col-md-10">
+		<div class="d-flex md-form">
+			<div class="">
+      			<input class=" form-control" type="text" id="mySearchText">
+      			<label class="" for="mySearchText">Search</label>
+      		</div>
+      	</div>
 		<div class="table-responsive">
 		<table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
 		        <thead>
@@ -61,10 +67,14 @@ td
 {% block script %}
 	<script type="text/javascript">
 		$(document).ready(function() {
-		    $('#example').DataTable({
+		    table = $('#example').DataTable({
 		    	"paging":   false,
 		    	"info":     false,
+		    	"dom": 'lrtip',
 		    });
+		    $('#mySearchText').keyup(function(){
+			      table.search($(this).val()).draw() ;
+			});
 		} );
 	</script>
 {% endblock script %}
