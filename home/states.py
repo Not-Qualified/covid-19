@@ -27,7 +27,7 @@ states_dict = {
 			"TG": "Telangana",
 			"TN": "Tamil Nadu", 	
 			"TR": "Tripura", 	
-			"UT": "Uttarakhand/Uttranchal",
+			"UT": "Uttarakhand Uttranchal",
 			"UP": "Uttar Pradesh", 	
 			"WB": "West Bengal", 	
 			"AN": "Andaman & Nicobar", 	

@@ -46,8 +46,13 @@ footer
     background: rgb(0,128,128);
 	background: linear-gradient(90deg, rgba(0,128,128,1) 0%, rgba(0,0,0,0) 100%); 
 }
-/* Table Styling */
 
+/* Table Styling */
+table
+{
+	table-layout: fixed;
+	font-size: 15px;
+}
 table tbody tr th a
 {
 	text-decoration: underline;
@@ -212,10 +217,10 @@ h5
 	{
 		font-size: 3vw;
 	}
-	/*table
+	table
 	{
-		table-layout: auto !important;
-	}*/
+		table-layout: auto;
+	}
 }
 
 /*Small devices (landscape phones, 576px and up)*/
@@ -228,6 +233,10 @@ h5
 	h5
 	{
 		font-size: 3.2vw;
+	}
+	table
+	{
+		table-layout: auto;
 	}
 }
 

@@ -66,15 +66,24 @@
 					        <tr>
 					        	<th><strong>Total</strong></th>
 					        	<td>
+					        		<i class="fas fa-arrow-up text-danger"></i>
+					        		<span class="Count text-danger">
+					        			{{ state_list.Total_Testing.delta.confirmed }}</span><br />
 					        		<strong><span class="Count text-danger">{{ state_list.Total_Testing.total.confirmed }}</span></strong>
 					        	</td>
 					        	<td>
 					        		<strong><span class="Count text-primary">{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered }}</span></strong>
 					        	</td>
 					        	<td>
+					        		<i class="fas fa-arrow-up text-success"></i>
+					        		<span class="Count text-success">
+					        			{{ state_list.Total_Testing.delta.recovered }}</span><br />
 					        		<strong><span class="Count text-success">{{ state_list.Total_Testing.total.recovered }}</span></strong>
 					        	</td>
 					        	<td>
+					        		<i class="fas fa-arrow-up text-dark"></i>
+					        		<span class="Count text-dark">
+					        			{{ state_list.Total_Testing.delta.deceased }}</span><br />
 					        		<strong><span class="Count text-dark">{{ state_list.Total_Testing.total.deceased }}</span></strong>
 					        	</td>
 					        	<td class="tested-col">
