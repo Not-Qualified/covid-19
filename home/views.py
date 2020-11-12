@@ -83,7 +83,7 @@ def district_view(request, state=None, *args, **kwargs):
 
 	# new_chain = new_chain.json()
 
-	with open('/opt/data_all.json') as f:
+	with open('/opt/data-all.json') as f:
 			new_chain = json.load(f)
 			f.close()
 
