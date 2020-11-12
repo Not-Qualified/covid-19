@@ -1,9 +1,11 @@
+import requests
+import os
+import json
+from datetime import datetime, timedelta
 from django.template.loader import get_template
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib import messages
-import requests
-from datetime import datetime, timedelta
 from .states import states_dict
 from .models import HospitalRegister, VaccineUpdatePost
 from .forms import VaccineUpdateForm, HospitalRegisterForm, ContactUsListForm
@@ -13,17 +15,30 @@ def home_view(request, *args, **kwargs):
 	if request.method == "GET":
 		state_list = {}
 
-		try:
-			new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
-		except:
-			return HttpResponse("<script>location.reload();</script>")
+		# try:
+		# 	new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
+		# except:
+		# 	return HttpResponse("<script>location.reload();</script>")
 
-		new_chain = new_chain.json()
+		with open('/opt/data_all.json') as f:
+			new_chain = json.load(f)
+			f.close()
+
+		# new_chain = new_chain.json()
+
+		# district_confirmed = {}
+		# district_confirmed["date"] = {}
+		# district_confirmed["date"]["code"] = []
+		# district_confirmed["confirmed"] = []
 
 		blank, confirmed, active, recovered, deceased = [], [], [], [], []
 		for dates, states_data in new_chain.items():
+			# district_confirmed["date"].append(dates)
+			# district_confirmed["date"] = dates
 			blank.append(datetime.strptime(dates, "%Y-%m-%d").strftime("%d-%b"))
 			for state_code, state_data in states_data.items():
+				# district_confirmed["date"]["code"].append(state_code)
+				# district_confirmed["date"]["code"] = state_code
 				state_data["code"] = state_code
 				if(state_code == "TT"):
 					confirmed.append(state_data.get("total").get("confirmed", 0))
@@ -38,6 +53,8 @@ def home_view(request, *args, **kwargs):
 					elif(dates == (datetime.today()-timedelta(days=1)).strftime("%Y-%m-%d")):
 						state_list[states_dict[state_code]] = state_data
 				else:
+					# if("total" in state_data and state_code in states_dict):
+					# 	district_confirmed["confirmed"].append(state_data.get("total").get("confirmed", 0))
 					if(dates == datetime.today().strftime("%Y-%m-%d")):
 						state_list[states_dict[state_code]] = state_data
 					elif(dates == (datetime.today()-timedelta(days=1)).strftime("%Y-%m-%d")):
@@ -50,6 +67,7 @@ def home_view(request, *args, **kwargs):
 			"active": active[-30:],
 			"recovered": recovered[-30:],
 			"deceased": deceased[-30:],
+			# "district": district_confirmed,
 		}
 		return render(request, "home/index.html", context)
 
@@ -57,12 +75,17 @@ def home_view(request, *args, **kwargs):
 def district_view(request, state=None, *args, **kwargs):
 	state_list = {}
 	state_list["Total_Testing"] = {}
-	try:
-		new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
-	except:
-		return HttpResponse("<script>location.reload();</script>")
+	
+	# try:
+	# 	new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
+	# except:
+	# 	return HttpResponse("<script>location.reload();</script>")
 
-	new_chain = new_chain.json()
+	# new_chain = new_chain.json()
+
+	with open('/opt/data_all.json') as f:
+			new_chain = json.load(f)
+			f.close()
 
 	blank, confirmed, active, recovered, deceased = [], [], [], [], []
 	district_data = {}
@@ -72,7 +95,6 @@ def district_view(request, state=None, *args, **kwargs):
 		for state_code, state_data in states_data.items():
 			if(state_code == state):
 				state_list["Total_Testing"]["total"] = state_data.get("total")
-				# state_list["Total_Testing"]["delta"] = state_data.get("delta")
 
 				confirmed.append(state_data.get("total").get("confirmed", 0))
 				active.append(
