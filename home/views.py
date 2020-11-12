@@ -20,7 +20,7 @@ def home_view(request, *args, **kwargs):
 		# except:
 		# 	return HttpResponse("<script>location.reload();</script>")
 
-		with open('/opt/data_all.json') as f:
+		with open('/opt/data-all.json') as f:
 			new_chain = json.load(f)
 			f.close()
 
@@ -75,7 +75,7 @@ def home_view(request, *args, **kwargs):
 def district_view(request, state=None, *args, **kwargs):
 	state_list = {}
 	state_list["Total_Testing"] = {}
-	
+
 	# try:
 	# 	new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
 	# except:
