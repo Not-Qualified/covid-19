@@ -39,8 +39,13 @@
 						        		</th>
 						        		
 						        		<td data-order="{{ data.total.confirmed|default:0 }}">
-						        			<strong><i class="fas fa-arrow-up text-danger"></i><span class="Count text-danger">{{ data.delta.confirmed }}</span></strong>
+						        			{% if data.delta.confirmed %}
+						        			<strong>
+						        				<i class="fas fa-arrow-up text-danger"></i>
+						        				<span class="Count text-danger">{{ data.delta.confirmed }}</span>
+						        			</strong>
 						        			<br />
+						        			{% endif %}
 						        			<span class="Count">{{ data.total.confirmed|default:0 }}</span>
 						        		</td>
 						        		<td data-order="{{ data.total.confirmed|sub:data.total.recovered }}">
@@ -48,13 +53,23 @@
 						        			<span class="Count">{{ data.total|get_active }}</span>
 						        		</td>
 						        		<td data-order="{{ data.total.recovered|default:0 }}">
-						        			<strong><i class="fas fa-arrow-up text-success"></i><span class="Count text-success">{{ data.delta.recovered|default:0 }}</span></strong>
+						        			{% if data.delta.recovered %}
+						        			<strong>
+						        				<i class="fas fa-arrow-up text-success"></i>
+						        				<span class="Count text-success">{{ data.delta.recovered|default:0 }}</span>
+						        			</strong>
 						        			<br />
+						        			{% endif %}
 						        			<span class="Count">{{ data.total.recovered|default:0 }}</span>
 						        		</td>
 						        		<td data-order="{{ data.total.deceased|default:0 }}">
-						        			<strong><i class="fas fa-arrow-up text-black-50"></i><span class="Count text-black-50">{{ data.delta.deceased|default:0 }}</span></strong>
+						        			{% if data.delta.deceased %}
+						        			<strong>
+						        				<i class="fas fa-arrow-up text-black-50"></i>
+						        				<span class="Count text-black-50">{{ data.delta.deceased|default:0 }}</span>
+						        			</strong>
 						        			<br />
+						        			{% endif %}
 						        			<span class="Count">{{ data.total.deceased|default:0 }}</span>
 						        		</td>
 						        		<td data-order="{{ data.total.tested|default:0 }}" class="tested-col">{{ data.total.tested|floatword_indian|get_shortcut|default:0 }}</td>
