@@ -5,20 +5,52 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="theme-color" content="#000000"/>
+        <meta name="msapplication-TileColor" content="#2d89ef"/>
+        <meta name="theme-color" content="#ffffff"/>
+
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}"/>
+        <link rel="mask-icon" href="{% static 'images/safari-pinned-tab.svg' %}" color="#6c757d"/>
+        <link rel="manifest" href="/manifest.json"/>
+
         <meta name="description" content="Covid-19 India Update for Latest News about Covid Situation in India, also Vaccine Update and other detail as per Goverenment Approved Hospital List for Testing for COVID-19 near You">
+        <meta name="keywords" content="covid, covid19india, covid-19update, covid19indiaupdate, coronavirus, corona, india, virus, pandemic, disease, coronadisease"/>
         <meta name=”robots” content="index, follow">
 
         <!-- Open Graph Meta Tags -->
-        <meta property="og:title" content="Covid-19 India | Latest News, Vaccine News and More" />
+        <meta property="og:type" content="website"/>
         <meta property="og:url" content="https://www.covid19indiaupdate.com/" />
+        <meta property="og:title" content="Covid-19 India | Coronavirus Latest News, Vaccine News and More" />
         <meta property="og:description" content="Covid-19 India Update for Latest News about Covid Situation in India">
-        <meta property="og:image" itemprop="image" content="{% static 'images/favicon.png' %}">
-        <meta property="og:type" content="article" />
+        <meta property="og:image" content="{% static 'images/thumbnail.png' %}">
+        <meta property="og:image:type" content="image/png"/>
+        <meta property="og:image:width" content="256"/>
+        <meta property="og:image:height" content="256"/>
+
+
+
+        <!-- Twitter Meta Tags -->
+        <meta property="twitter:card" content="summary_large_image"/>
+        <meta property="twitter:url" content="https://www.covid19indiaupdate.com"/>
+        <meta property="twitter:title" content="Covid-19 India | Coronavirus Latest News, Vaccine News and More"/>
+        <meta name="twitter:site" value="@covid19indiaupdatecom"/>
+        <meta property="twitter:description" content="Covid-19 India Update for Latest News about Covid Situation in India"/>
+        <meta property="twitter:image" content="https://www.covid19indiaupdate.com/static/images/thumbnail.png"/>
+
+
+
+
+
+
+
 
         <!-- Favicon Icon -->
-        <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png" sizes="16x16"> 
+        <link rel="icon" href="{% static 'images/favicon.ico' %}"/>
 
-         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> 
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> 
 
         <!-- Google AdSense -->
         <script data-ad-client="ca-pub-6100627706671237" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -35,7 +67,7 @@
         {% include "css.html" %}
         {% block head %}{% endblock head %}
         
-        <title>Covid-19 India | Latest News, Vaccine News, Hospital List and more for India</title>
+        <title>Covid-19 India | Coronavirus Latest News, Vaccine News, Hospital List and more for India</title>
     </head>
     <body style="padding-top: 4.5rem;" class="d-flex flex-column h-100">
         
