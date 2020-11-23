@@ -148,3 +148,6 @@ AUTH_USER_MODEL = "user.User"
 # Custom Media Serving Settings
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
+
+# Session Settings
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
