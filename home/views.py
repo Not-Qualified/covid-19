@@ -1,6 +1,7 @@
 import requests
 import os
 import json
+import pandas as pd
 from datetime import datetime, timedelta
 from django.template.loader import get_template
 from django.shortcuts import render
@@ -15,59 +16,29 @@ def home_view(request, *args, **kwargs):
 	if request.method == "GET":
 		state_list = {}
 
-		# try:
-		# 	new_chain = requests.get("https://api.covid19india.org/v4/data-all.json")
-		# except:
-		# 	return HttpResponse("<script>location.reload();</script>")
+		df = pd.read_csv("state_wise.csv", )
+		df_state = df[(df.State != "Total") & (df.State != "State Unassigned")]
+		df_state = df_state.reset_index().to_json(orient='records')
+		df_state = json.loads(df_state)
 
-		with open('/opt/data-all.json') as f:
-			new_chain = json.load(f)
-			f.close()
+		df_india = df[df.State == "Total"]
+		df_india = df_india.reset_index().to_json(orient='records')
+		df_india = json.loads(df_india)
 
-		# new_chain = new_chain.json()
-
-		# district_confirmed = {}
-		# district_confirmed["date"] = {}
-		# district_confirmed["date"]["code"] = []
-		# district_confirmed["confirmed"] = []
-
-		blank, confirmed, active, recovered, deceased = [], [], [], [], []
-		for dates, states_data in new_chain.items():
-			# district_confirmed["date"].append(dates)
-			# district_confirmed["date"] = dates
-			blank.append(datetime.strptime(dates, "%Y-%m-%d").strftime("%d-%b"))
-			for state_code, state_data in states_data.items():
-				# district_confirmed["date"]["code"].append(state_code)
-				# district_confirmed["date"]["code"] = state_code
-				state_data["code"] = state_code
-				if(state_code == "TT"):
-					confirmed.append(state_data.get("total").get("confirmed", 0))
-					active.append(
-						state_data.get("total").get("confirmed", 0) - 
-						( state_data.get("total").get("recovered", 0) + 
-							state_data.get("total").get("deceased", 0)))
-					recovered.append(state_data.get("total").get("recovered", 0))
-					deceased.append(state_data.get("total").get("deceased", 0))
-					if(dates == datetime.today().strftime("%Y-%m-%d")):
-						state_list[states_dict[state_code]] = state_data
-					elif(dates == (datetime.today()-timedelta(days=1)).strftime("%Y-%m-%d")):
-						state_list[states_dict[state_code]] = state_data
-				else:
-					# if("total" in state_data and state_code in states_dict):
-					# 	district_confirmed["confirmed"].append(state_data.get("total").get("confirmed", 0))
-					if(dates == datetime.today().strftime("%Y-%m-%d")):
-						state_list[states_dict[state_code]] = state_data
-					elif(dates == (datetime.today()-timedelta(days=1)).strftime("%Y-%m-%d")):
-						state_list[states_dict[state_code]] = state_data
+		
+		# print(type(data), data)
+		# print(df_all)
 
 		context = {
-			"state_list": state_list,
-			"blank": blank[-30:],
-			"confirmed": confirmed[-30:],
-			"active": active[-30:],
-			"recovered": recovered[-30:],
-			"deceased": deceased[-30:],
+			# "state_list": state_list,
+			# "blank": blank[-30:],
+			# "confirmed": confirmed[-30:],
+			# "active": active[-30:],
+			# "recovered": recovered[-30:],
+			# "deceased": deceased[-30:],
 			# "district": district_confirmed,
+			"states": df_state,
+			"india": df_india[0],
 		}
 		return render(request, "home/index.html", context)
 

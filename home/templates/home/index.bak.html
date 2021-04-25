@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% load static %}
+{% load mathfilters %}
+{% load indian_numbers_tags %}
+{% load keyvalue %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+	<div class="col-1 col-sm-1 col-md-1 ml-5 mr-5 justify-content-center">
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Vertical Bars -->
+		<ins class="adsbygoogle"
+		     style="display:block"
+		     data-ad-client="ca-pub-6100627706671237"
+		     data-ad-slot="1379822249"
+		     data-ad-format="auto"
+		     data-full-width-responsive="true"></ins>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+		<br />
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Vertical Bars -->
+		<ins class="adsbygoogle"
+		     style="display:block"
+		     data-ad-client="ca-pub-6100627706671237"
+		     data-ad-slot="1379822249"
+		     data-ad-format="auto"
+		     data-full-width-responsive="true"></ins>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+		<br />
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Vertical Bars -->
+		<ins class="adsbygoogle"
+		     style="display:block"
+		     data-ad-client="ca-pub-6100627706671237"
+		     data-ad-slot="1379822249"
+		     data-ad-format="auto"
+		     data-full-width-responsive="true"></ins>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</div>
+	<div class="col-10 col-sm-10 col-md-8">
+		<!-- include "home/cards.html" %} -->
+		<div class="row justify-content-center">
+			<div class="col-sm-12 col-md-7">
+				<div class="table-responsive">
+					<div class="d-flex md-form">
+						<div>
+			      		<input class="form-control" type="text" id="mySearchText">
+			      		<label for="mySearchText">Search</label>
+			      		</div>
+			      	</div>
+					<table id="example" class="table table-sm table-hover table-striped" style="width:100%">
+					        <thead>
+					            <tr>
+					                <th class="th-header-state">State Name</th>
+					                <th class="th-header">Confirmed</th>
+					                <th class="th-header">Active</th>
+					                <th class="th-header">Recovered</th>
+					                <th class="th-header">Deceased</th>
+					                <th class="th-header tested-col">Tested</th>
+					                <th class="th-header">Population</th>
+					            </tr>
+					        </thead>
+					        <tbody>
+					        	{% for state, data in state_list.items %}
+					        	{% if not "Total_Testing" == state %}
+						        	<tr>
+						        		<th scope="row">
+						        			<a href="/{{ data.code }}/">{{ state }}</a>
+						        		</th>
+						        		
+						        		<td data-order="{{ data.total.confirmed|default:0 }}">
+						        			{% if data.delta.confirmed %}
+						        			<strong>
+						        				<i class="fas fa-arrow-up text-danger"></i>
+						        				<span class="Count text-danger">{{ data.delta.confirmed }}</span>
+						        			</strong>
+						        			<br />
+						        			{% endif %}
+						        			<span class="Count">{{ data.total.confirmed|default:0 }}</span>
+						        		</td>
+						        		<td data-order="{{ data.total|get_active }}">
+						        			<span class="Count">{{ data.total|get_active }}</span>
+						        		</td>
+						        		<td data-order="{{ data.total.recovered|default:0 }}">
+						        			{% if data.delta.recovered %}
+						        			<strong>
+						        				<i class="fas fa-arrow-up text-success"></i>
+						        				<span class="Count text-success">{{ data.delta.recovered|default:0 }}</span>
+						        			</strong>
+						        			<br />
+						        			{% endif %}
+						        			<span class="Count">{{ data.total.recovered|default:0 }}</span>
+						        		</td>
+						        		<td data-order="{{ data.total.deceased|default:0 }}">
+						        			{% if data.delta.deceased %}
+						        			<strong>
+						        				<i class="fas fa-arrow-up text-black-50"></i>
+						        				<span class="Count text-black-50">{{ data.delta.deceased|default:0 }}</span>
+						        			</strong>
+						        			<br />
+						        			{% endif %}
+						        			<span class="Count">{{ data.total.deceased|default:0 }}</span>
+						        		</td>
+						        		<td data-order="{{ data.total.tested|default:0 }}" class="tested-col">{{ data.total.tested|floatword_indian|get_shortcut|default:0 }}</td>
+						        		<td data-order="{{ data.meta.population|default:0 }}">{{ data.meta.population|floatword_indian|get_shortcut|default:0 }}</td>
+						        	</tr>
+					        	{% endif %}
+					        	{% endfor %}
+					        </tbody>
+					        <tr>
+					        	<th><strong>Total</strong></th>
+					        	<td>
+					        		<i class="fas fa-arrow-up text-danger"></i>
+					        		<span class="Count text-danger">
+					        			{{ state_list.Total_Testing.delta.confirmed }}</span><br />
+					        		<strong><span class="Count">{{ state_list.Total_Testing.total.confirmed }}</span></strong>
+					        	</td>
+					        	<td>
+					        		<strong><span class="Count">{{ state_list.Total_Testing.total.confirmed|sub:state_list.Total_Testing.total.recovered }}</span></strong>
+					        	</td>
+					        	<td>
+					        		<i class="fas fa-arrow-up text-success"></i>
+					        		<span class="Count text-success">
+					        			{{ state_list.Total_Testing.delta.recovered }}</span><br />
+					        		<strong><span class="Count">{{ state_list.Total_Testing.total.recovered }}</span></strong>
+					        	</td>
+					        	<td>
+					        		<i class="fas fa-arrow-up text-dark"></i>
+					        		<span class="Count text-dark">
+					        			{{ state_list.Total_Testing.delta.deceased }}</span><br />
+					        		<strong><span class="Count">{{ state_list.Total_Testing.total.deceased }}</span></strong>
+					        	</td>
+					        	<td class="tested-col">
+					        		<strong><span class="text-warning">{{ state_list.Total_Testing.total.tested|floatword_indian|get_shortcut|default:0 }}</span></strong>
+					        	</td>
+					        	<td>
+					        		<strong><span class="text-info">{{ "138 Crores"|get_shortcut }}</span></strong>
+					        	</td>
+					        </tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-5">
+				{% include 'home/chart.html' %}
+			</div>
+		</div>
+
+		<br />
+		<br />
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Horizontal Bar -->
+		<ins class="adsbygoogle"
+		     style="display:block"
+		     data-ad-client="ca-pub-6100627706671237"
+		     data-ad-slot="5827716606"
+		     data-ad-format="auto"
+		     data-full-width-responsive="true"></ins>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+		<br />
+		<br />
+
+	</div>
+	<div class="col-1 col-sm-1 col-md-1 ml-5 mr-5 justify-content-center">
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Vertical Bars -->
+		<ins class="adsbygoogle"
+		     style="display:block"
+		     data-ad-client="ca-pub-6100627706671237"
+		     data-ad-slot="1379822249"
+		     data-ad-format="auto"
+		     data-full-width-responsive="true"></ins>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+		<br />
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Vertical Bars -->
+		<ins class="adsbygoogle"
+		     style="display:block"
+		     data-ad-client="ca-pub-6100627706671237"
+		     data-ad-slot="1379822249"
+		     data-ad-format="auto"
+		     data-full-width-responsive="true"></ins>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+		<br />
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- Vertical Bars -->
+		<ins class="adsbygoogle"
+		     style="display:block"
+		     data-ad-client="ca-pub-6100627706671237"
+		     data-ad-slot="1379822249"
+		     data-ad-format="auto"
+		     data-full-width-responsive="true"></ins>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+	</div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    table = $('#example').DataTable({
+		    	"paging":   false,
+		    	"info":     false,
+		    	"order": [[ 1, "desc" ]],
+		    	"scrollX": false,
+		    	"dom": 'lrtip',
+		    });
+		    $('#mySearchText').keyup(function(){
+			      table.search($(this).val()).draw() ;
+			});
+		} );
+	</script>
+
+	<script type="text/javascript">
+		$('.Count').each(function () {
+		    $(this).prop('Counter',0).animate({
+		        Counter: $(this).text()
+		    }, {
+		        duration: 3000,
+		        easing: 'swing',
+		        step: function (now) {
+		            $(this).text(Math.ceil(now).toLocaleString('en-IN'));
+		        }
+		    });
+		});
+	</script>
+
+	
+{% endblock script %}
