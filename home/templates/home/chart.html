@@ -1,0 +1,190 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+
+<!-- <div class="row"> -->
+    <!-- <div class="col-12 col-md-3"> -->
+        <div>
+        <canvas class="sidebar-canvas-confirmed" width="350" height="300" id="confirmed-chart"></canvas>
+        </div>
+    <!-- </div> -->
+    <!-- <div class="col-12 col-md-3"> -->
+        <div>
+        <canvas class="sidebar-canvas-active" width="350" height="300" id="active-chart"></canvas>
+    <!-- </div> -->
+    <!-- <div class="col-12 col-md-3"> -->
+        </div>
+        <div>
+        <canvas class="sidebar-canvas-recovered" width="350" height="300" id="recovered-chart"></canvas>
+    <!-- </div> -->
+    <!-- <div class="col-12 col-md-3"> -->
+        </div>
+        <div>
+        <canvas class="sidebar-canvas-deceased" width="350" height="300" id="deceased-chart"></canvas>
+        </div>
+    <!-- </div> -->
+<!-- </div> -->
+
+<script>
+
+var opt = {
+        animation: {
+            duration: 3000,
+            numSteps: 300,
+            easing: "linear", // general animation time
+        },
+        responsive: true,
+        title: {
+            // display: true,
+            // text: 'COVID - Chart'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+            displayColors: false,
+            // backgroundColor: "red",
+            title: "Data",
+            titleFontFamily: "",
+            bodyFontSize: 17,
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    return tooltipItem.yLabel.toLocaleString("en-IN");
+                }
+            },
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    drawOnChartArea: false,
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Last - 30 Days Cummulative'
+                },
+                ticks: {
+                    autoSkip: true,
+                    maxTicksLimit: 5,
+                    maxRotation: 0,
+                    minRotation: 0
+                },
+            }],
+            yAxes: [{
+                gridLines: {
+                    drawOnChartArea: false,
+                },
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Cases'
+                },
+                ticks: {
+                    autoSkip: true,
+                    maxTicksLimit: 5,
+                    callback: function(label, index, labels) {
+                        return number_to_words(label);
+                    }
+                },
+            }]
+        }
+    }
+
+var ctx = document.getElementById('confirmed-chart');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ blank|safe }},
+        datasets: [{
+            label: 'Confirmed',
+            data: {{ confirmed }},
+            fillColor: "red",
+            borderWidth: 5,
+            backgroundColor: "red",
+            borderColor: "#ef9a9a",
+            fill: false,
+        },]
+    },
+
+    options: opt,
+});
+
+
+
+
+var active_ctx = document.getElementById('active-chart');
+var active = new Chart(active_ctx, {
+    type: 'line',
+    data: {
+        labels: {{ blank|safe }},
+        datasets: [{
+            label: 'Active',
+            data: {{ active }},
+            borderWidth: 5,
+            backgroundColor: "blue",
+            borderColor: "#90caf9",
+            fill: false,
+        },]
+    },
+    options: opt,
+});
+
+
+
+
+var recovered_ctx = document.getElementById('recovered-chart');
+var recovered = new Chart(recovered_ctx, {
+    type: 'line',
+    data: {
+        labels: {{ blank|safe }},
+        datasets: [{
+            label: 'Recovered',
+            data: {{ recovered }},
+            borderWidth: 5,
+            backgroundColor: "green",
+            borderColor: "#a5d6a7",
+            fill: false,
+        },]
+    },
+    options: opt,
+});
+
+
+
+
+var deceased_ctx = document.getElementById('deceased-chart');
+var deceased = new Chart(deceased_ctx, {
+    type: 'line',
+    data: {
+        labels: {{ blank|safe }},
+        datasets: [{
+            label: 'Deceased',
+            data: {{ deceased }},
+            borderWidth: 5,
+            backgroundColor: "grey",
+            borderColor: "#bdbdbd",
+            fill: false,
+        }]
+    },
+    options: opt,
+});
+
+
+
+
+
+
+function number_to_words(label) {
+    var val = Math.abs(label)
+    if (val >= 10000000) {
+       val = (val / 10000000).toFixed(0) + ' Cr';
+    } else if (val >= 100000) {
+       val = (val / 100000).toFixed(1) + ' L';
+    } else if (val >= 1000) {
+        val = (val / 1000).toFixed(0) + ' K';
+    }
+    return val;
+}
+
+</script>

@@ -1,0 +1,41 @@
+{% load indian_numbers_tags %}
+{% load mathfilters %}
+{% load keyvalue %}
+
+<div class="d-flex flex-row justify-content-around my-4">
+	<!-- <div class="crd flex-fill"> -->
+	<div class="flex-fill crd-clmn py-3 child-card"> <!-- border border-danger -->
+		<div class="mt-2 mb-2 text-danger">Confirmed</div>
+			<h2 class="card-title text-danger"><span class="Count">{{ india.Confirmed|default:0 }}</span></h2>
+			{% if india.Delta_Confirmed %}
+			<h5 class="card-title text-danger">+<span class="Count">{{ india.Delta_Confirmed|default:0 }}</span></h5>
+			{% endif %}
+	</div>
+
+	<div class="flex-fill crd-clmn py-3 child-card"> <!-- border border-primary -->
+		<div class="mt-2 mb-2 text-primary">Active</div>
+			<!-- <i class="heart fa fa-heart"></i> -->
+			<h2 class="card-title text-primary"><span class="Count">{{ india.Active|default:0 }}</span></h2>
+			{% if state_list.Total_Testing.delta %}
+			<h5 class="card-title text-primary"><span class="Count"> {{ state_list.Total_Testing.delta|get_active }}</span></h5>
+			{% endif %}
+      <i class="heart fa fa-heart"></i>
+	</div>
+
+	<div class="flex-fill crd-clmn py-3 child-card"> <!-- border border-success -->
+		<div class="mt-2 mb-2 text-success">Recovered</div>
+			<h2 class="card-title text-success"><span class="Count">{{ india.Recovered|default:0 }}</span></h2>
+			{% if india.Delta_Recovered %}
+			<h5 class="card-title text-success">+<span class="Count">{{ india.Delta_Recovered|default:0 }}</span></h5>
+			{% endif %}
+	</div>
+
+	<div class="flex-fill crd-clmn py-3 child-card"> <!-- border border-light  -->
+		<div class="mt-2 mb-2 text-black-50">Deceased</div>
+			<h2 class="card-title text-black-50"><span class="Count">{{ india.Deaths|default:0 }}</span></h2>
+			{% if india.Delta_Deaths %}
+			<h5 class="card-title text-black-50">+<span class="Count">{{ india.Delta_Deaths|default:0 }}</span></h5>
+			{% endif %}
+	</div>
+	<!-- </div> -->
+</div>

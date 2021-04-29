@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load mathfilters %}
+{% load keyvalue %}
+
+{% block head %}
+	<meta name="keywords" content="{{ state }}-corona-update"/>
+{% endblock head %}
+
+{% block content %}
+<style type="text/css">
+canvas
+{
+	margin: 3px;
+}
+</style>
+<div class="container">
+
+	<h3>{{ state }}</h3>
+	<hr />
+
+	<div class="d-flex flex-row justify-content-around my-4">
+		<div class="flex-fill crd-clmn py-3 child-card">
+			<div class="mt-2 mb-2 text-danger">Confirmed</div>
+				<h2 class="card-title text-danger"><span class="Count">{{ confirmed|last }}</span></h2>
+		</div>
+
+		<div class="flex-fill crd-clmn py-3 child-card">
+			<div class="mt-2 mb-2 text-primary">Active</div>
+				<!-- <i class="heart fa fa-heart"></i> -->
+				<h2 class="card-title text-primary"><span class="Count">{{ active|last }}</span></h2>
+	      <i class="heart fa fa-heart"></i>
+		</div>
+
+		<div class="flex-fill crd-clmn py-3 child-card">
+			<div class="mt-2 mb-2 text-success">Recovered</div>
+				<h2 class="card-title text-success"><span class="Count">{{ recovered|last }}</span></h2>
+		</div>
+
+		<div class="flex-fill crd-clmn py-3 child-card">
+			<div class="mt-2 mb-2 text-black-50">Deceased</div>
+				<h2 class="card-title text-black-50"><span class="Count">{{ deceased|last }}</span></h2>
+		</div>
+	</div>
+
+
+	<div class="d-flex flex-column flex-sm-column flex-md-row mb-5" style="justify-content: space-evenly;">
+		{% include "home/chart.html" %}
+	</div>
+</div>
+<div class="container">
+<div class="row justify-content-center">
+	<div class="col-10 col-sm-10 col-md-8">
+		<div class="table-responsive">
+			<div class="d-flex md-form">
+				<div>
+	      		<input class="form-control" type="text" id="mySearchText">
+	      		<label for="mySearchText">Search</label>
+	      		</div>
+	      	</div>
+			<table id="example" class="table table-sm table-striped table-hover" style="width:100%">
+			        <thead>
+			            <tr>
+			                <th class="th-header-state">District Name</th>
+			                <th class="th-header">Confirmed</th>
+			                <th class="th-header">Active</th>
+			                <th class="th-header">Recovered</th>
+			                <th class="th-header">Deceased</th>
+			                <th class="th-header">Tested</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	{% for district, total in both.items %}
+			        	<tr>
+			        		<th>{{ district }}</th>
+			        		<td class="Count">
+			        			{{ total|get_item:"confirmed" }}
+			        		</td>
+			        		<td class="Count">
+			        			{{ total|get_active }}
+			        		</td>
+			        		<td class="Count">
+			        			{{ total|get_item:"recovered" }}
+			        		</td>
+			        		<td class="Count">
+			        			{{ total|get_item:"deceased" }}
+			        		</td>
+			        		<td class="Count">
+			        			{{ total|get_item:"tested" }}
+			        		</td>
+			        	</tr>
+			        	{% endfor %}
+			        </tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock content %}
+
+{% block script %}
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    table = $('#example').DataTable({
+		    	"paging":   false,
+		    	"info":     false,
+		    	"order": [[ 1, "desc" ]],
+		    	"dom": 'lrtip',
+		    });
+		    $('#mySearchText').keyup(function(){
+			      table.search($(this).val()).draw() ;
+			});
+		} );
+	</script>
+
+	<script type="text/javascript">
+		$('.Count').each(function () {
+		    $(this).prop('Counter',0).animate({
+		        Counter: $(this).text()
+		    }, {
+		        duration: 3000,
+		        easing: 'swing',
+		        step: function (now) {
+		            $(this).text(Math.ceil(now).toLocaleString('en-IN'));
+		        }
+		    });
+		});
+	</script>
+{% endblock script %}

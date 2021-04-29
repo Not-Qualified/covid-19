@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+	<div class="col-10 col-sm-10 col-md-10">
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-4">Contact Us</h1>
+				<hr />
+				<p class="lead">Contact Us via Email at info@thepenguina.com - 
+					<a href="https://thepenguina.com/" target="_blank">thepenguina.com</a>
+				</p>
+				<div class="row">
+					<div class="col">
+						<form method="POST" action=".">
+							{% csrf_token %}
+							<div class="col-sm col-md-6">
+								<div class="md-form mb-5">
+									{{ form.name }}
+									{{ form.name.label_tag|cut:":" }}
+									<span class="text-danger">{{ form.name.errors }}</span>
+								</div>
+							</div>
+
+							<div class="col-sm col-md-6">
+								<div class="md-form mb-5">
+								{{ form.mobile_number }}
+								{{ form.mobile_number.label_tag|cut:":" }}
+								<span class="text-danger">{{ form.mobile_number.errors }}</span>
+								</div>
+							</div>
+
+							<div class="col-sm col-md-6">
+								<div class="md-form mb-5">
+								{{ form.message }}
+								{{ form.message.label_tag|cut:":" }}
+								<span class="text-danger">{{ form.message.errors }}</span>
+								</div>
+							</div>
+							<button class="btn btn-primary" type="submit">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

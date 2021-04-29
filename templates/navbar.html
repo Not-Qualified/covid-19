@@ -1,0 +1,82 @@
+{% load static %}
+{% url 'home_view' as home_view %}
+{% url 'vaccine_update_view' as vaccine_update_view %}
+{% url 'hospital_register_view' as hospital_register_view %}
+{% url 'verified_hospital_view' as verified_hospital_view %}
+{% url 'testing_center_view' as testing_center_view %}
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <a class="navbar-brand" href="{{ home_view }}">
+        <img src="{% static 'images/india-navbar-image.png' %}" alt="logo" width="30" height="30" class="d-inline-block align-top">
+        Covid-19 India
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            {% if request.path == home_view %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ home_view }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ home_view }}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% endif %}
+
+            {% if request.path == vaccine_update_view %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ vaccine_update_view }}">Vaccine Update</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ vaccine_update_view }}">Vaccine Update</a>
+            </li>
+            {% endif %}
+
+            {% if request.path == hospital_register_view %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ hospital_register_view }}">COVID Hospital Register</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ hospital_register_view }}">COVID Hospital Register</a>
+            </li>
+            {% endif %}
+
+            {% if request.path == verified_hospital_view %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ verified_hospital_view }}">COVID Hospital List</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ verified_hospital_view }}">COVID Hospital List</a>
+            </li>
+            {% endif %} 
+
+            {% if request.path == testing_center_view %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ testing_center_view }}">COVID Testing Center</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ testing_center_view }}">COVID Testing Center</a>
+            </li>
+            {% endif %}
+            
+            <li class="nav-item mb-5">
+                <div id="google_translate_element"></div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h1 style="display:none;">Coronavirus - Covid19 Inida Update</h1>
+<h2 style="display:none;">Covid-19 India Update for Coronavirus Situation in India, also Vaccine Update and Goverenment Approved Hospital List for Testing for COVID-19 near You</h2>
+<h3 style="display:none;">Coronavirus</h3>
+<h4 style="display:none;">Coronavirus - Covid19 Inida Update - District Wise Update</h4>
+<h5 style="display:none;">Covid-19 India Update for Coronavirus Situation in India, also Vaccine Update and Goverenment Approved Hospital List for Testing for COVID-19 near You and Other Relevant News regarding to COVID-19</h5>
+<h6 style="display:none;">Coronavirus - COVID-19 India Update</h6>
