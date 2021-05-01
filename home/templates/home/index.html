@@ -3,7 +3,7 @@
 
 
 {% block content %}
-	
+	<div class="container">
 	{% include "home/cards.html" %}
 
 	<table id="example" class="table table-sm table-hover table-striped" style="width:100%">
@@ -61,7 +61,21 @@
 							{% endif %}
 							<span class="Count">{{ state.Deaths|default:0 }}</span>
 						</td>
-						<td data-order="{{ data.total.tested|default:0 }}" class="tested-col">{{ data.total.tested|default:0 }}</td>
+						{% for test in tested%}
+						{% if test.State == state.State %}
+						<td data-order="{{ test.index|default:0 }}" class="tested-col Count">
+						{%if test.TotalTested == NaN %}
+							{% for test2 in tested2 %}
+								{% if test2.State == state.State %}
+									{{test2.TotalTested|default:0}}
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{{test.TotalTested|default:0}}
+						{% endif %}	
+						 </td>
+						{% endif %}
+						{% endfor %}
 					</tr>
 					{% endif %}
 				{% endfor %}
@@ -73,30 +87,28 @@
 				<th><strong>Total</strong></th>
 				<td>
 					<i class="fas fa-arrow-up text-danger"></i>
-					<span class="Count text-danger">
-						{{ state_list.Total_Testing.delta.confirmed }}</span><br />
-					<strong><span class="Count">{{ state_list.Total_Testing.total.confirmed }}</span></strong>
+					
+					<strong><span class="Count">{{ india.Confirmed }}</span></strong>
 				</td>
 				<td>
-					<strong><span class="Count">{{ state_list.Total_Testing.total.confirmed }}</span></strong>
+					<strong><span class="Count">{{ india.Active }}</span></strong>
 				</td>
 				<td>
 					<i class="fas fa-arrow-up text-success"></i>
-					<span class="Count text-success">
-						{{ state_list.Total_Testing.delta.recovered }}</span><br />
-					<strong><span class="Count">{{ state_list.Total_Testing.total.recovered }}</span></strong>
+					
+					<strong><span class="Count">{{ india.Recovered }}</span></strong>
 				</td>
 				<td>
 					<i class="fas fa-arrow-up text-dark"></i>
-					<span class="Count text-dark">
-						{{ state_list.Total_Testing.delta.deceased }}</span><br />
-					<strong><span class="Count">{{ state_list.Total_Testing.total.deceased }}</span></strong>
+					
+					<strong><span class="Count">{{ india.Deaths }}</span></strong>
 				</td>
 				<td class="tested-col">
-					<strong><span class="text-warning">{{ state_list.Total_Testing.total.tested|default:0 }}</span></strong>
+					<strong><span class="Count">{{ totaltested }}</span></strong>
 				</td>
 			</tr>
 	</table>
+</div>
 {% endblock content %}
 
 
